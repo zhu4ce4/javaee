@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<title>港桥新城网事</title>
+<!--<script src="../jquery-3.3.1.js"></script>-->
+<!--<link href="../css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">-->
+<!--<script src="../js/bootstrap/3.3.6/bootstrap.min.js"></script>-->
+<head>
+    <link href="./mysite/addition/tempcss.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body onload="scroll();">
+
+<div class="box" style="margin-right: 1px">
+    <div class="content">
+        <marquee behavior=alternate scrollamount="5">***本港最大社交门户 港桥新城网事
+            欢迎您!***寻人寻亲寻友启事公告广告招聘咨询服务贷款***商务事宜请联系助理(微信):dongdongwoshishi
+        </marquee>
+    </div>
+</div>
+<hr>
+
+<div class="box2" style="margin-right: 1px">
+    <h4 style="color: black">古今多少事 都付笑谈中 </h4>
+    <h1 style="color: black">本期封面 特别推荐-->&nbsp&nbsp&nbsp&nbsp&nbsp迷雾中的港桥古镇</h1>
+    <img align="left" src="./mysite/icon/gq.jpg" width="50%"/>
+</div>
+<hr>
+
+<div>
+    <table id="toutiao" width="100%">
+        <tr>
+            <td rowspan="2" width='5%'><h1 style="color: red">本港今日头条</h1></td>
+            <td width='20%'><h2>猪肉价格一格一格一格一格一格一格一格一格一格一格一路上涨!</h2></td>
+            <td width='20%'><h2>某餐厅火锅推荐！</h2></td>
+            <td width='20%'><h2>谁家的小狗掉沟里了?</h2></td>
+            <td width='20%'><h2>谁家的小狗掉沟里了?</h2></td>
+            <td width='20%'><h2>谁家的小狗掉沟里了?</h2></td>
+        </tr>
+        <tr>
+            <td width='20%'><h2>股市昨日一格一格一格一格一格一格一格一格一格一格一格一格一格突破10000点!</h2></td>
+            <td width='20%'><h2>猫狗大战斗鸡比赛明日开战</h2></td>
+            <td width='20%'><h2>跌跌跌跌跌跌跌跌跌!</h2></td>
+            <td width='20%'><h2>跌跌跌跌跌跌跌跌跌!</h2></td>
+            <td width='20%'><h2>跌跌跌跌跌跌跌跌跌!</h2></td>
+        </tr>
+    </table>
+</div>
+<div>
+    <img src="./mysite/icon/4.jpg" style="margin-top: 5px" width=100%>
+    <img src="./mysite/icon/5.jpg" style="margin-top: 5px" width=100%>
+    <img src="./mysite/icon/6.jpg" style="margin-top: 5px" width=100%>
+</div>
+<hr/>
+<table border=0 cellPadding=0 cellSpacing=0 style="line-height: 120%;font-size: larger" width="100%">
+    <tr bgcolor="white" id="subao">
+        <td width=3%><strong>速报</strong></td>
+        <td width=20%>CPI连续4个月猪肉价格下行;</td>
+        <td width=20%>李克强鼓励专家企业家：敞开说 此处无禁忌</td>
+        <td width=20%>收评：沪指走低跌1.39%失守2600 本周累计跌2.9%</td>
+        <td id="datetimenow" width=20%></td>
+        <td width=20%>今天天气：晴</td>
+        <td style="text-align: left"><img src="./mysite/icon/qingtian.PNG"></td>
+    </tr>
+    <!--todo:上翻效果-->
+</table>
+<script>
+    var intYears, intMonths, intDays, intHours, intMinutes;
+    var today;
+    today = new Date(); //系统当前时间
+    intYears = today.getFullYear(); //得到年份,getFullYear()比getYear()更普适
+    intMonths = today.getMonth() + 1; //得到月份，要加1
+    intDays = today.getDate(); //得到日期
+    if (intDays < 10) {
+        intDays = '0' + intDays;
+    }
+    intHours = today.getHours(); //得到小时
+    if (intHours < 10) {
+        intHours = '0' + intHours;
+    }
+    intMinutes = today.getMinutes(); //得到分钟
+    if (intMinutes < 10) {
+        intMinutes = '0' + intMinutes;
+    }
+    document.getElementById('datetimenow').innerHTML = "当前时间：" + intYears + '年' + intMonths + '月' + intDays + '日' + intHours + ':' + intMinutes;
+</script>
+<hr/>
+
+<div id="logo" style="margin-bottom: 15px;margin-top: 10px">
+    <div id="logo1" style="width: 196px"><img height="70" src="./mysite/icon/7.png" width='196'></div>
+    <div id="logo2" style="margin-left: 10%;margin-top: 1.5%"><a
+            href="login.html"
+            style="text-decoration: none;color: red;font-size: x-large;"><strong>笑傲江湖 由此进入</strong></a></div>
+    <div id="logo3" style="margin-left: 5%;margin-top: 1.5%"><img height="30" id="ad1" src="./mysite/icon/1.jpeg"
+                                                                  width="225"/>
+    </div>
+    <div id="logo4" style="margin-left: 5%;margin-top: 1.5%"><img height="20" src="./mysite/icon/3.gif"
+                                                                  style=";padding-bottom: 1.5%"
+                                                                  width="98"></div>
+    <div style="text-align: right"><img height="77" id="logo5" src="./mysite/icon/2.png" width="240"></div>
+</div>
+
+<hr>
+
+<div>
+    <div id="jisuanqi" style="margin-right: 50px;margin-top: 50px">+_*/计算器
+        <input id="first" placeholder="0" size="4" type="text">
+        <select id="mym">
+            <option id="add" value="add">+</option>
+            <option id="minus" value="minus">-</option>
+            <option id="multiply" value="multiply">*</option>
+            <option id="divided" value="divided">/</option>
+        </select>
+        <input id="second" placeholder="0" size="4" type="text">
+        <button onclick="getResult()" type="button">等于</button>
+        <input id="result" placeholder="0" size="8" type="text">
+        <button onclick="resetInput()" type="button">清空</button>  <!--onclick="clear()"错误，因为clear是关键字！-->
+    </div>
+    <div>
+        <table id='lixijisuanqi' style="border-collapse: collapse;margin-top: 10px">
+            <tr>
+                <td>起始资金</td>
+                <td><input id="origin" type="text" value="0"></td>
+                <td>￥</td>
+            </tr>
+            <tr>
+                <td>每年收益</td>
+                <td><input id="rate" type="text" value="5"></td>
+                <td>%</td>
+            </tr>
+            <tr>
+                <td>投资年数</td>
+                <td><input id="years" type="text" value="10"></td>
+                <td>年</td>
+            </tr>
+            <tr>
+                <td>每年追加资金</td>
+                <td><input id="benjin" type="text" value="10000"></td>
+                <td>￥</td>
+            </tr>
+            <tr>
+                <td align="center" colspan="3">
+                    <button onclick="compute()" style="width: 20%;text-align: center" type="button">计算</button>
+                </td>
+            </tr>
+            <tr>
+                <td>本金和</td>
+                <td><input id="amountOfBenjin" type="text"></td>
+                <td>￥</td>
+            </tr>
+            <tr>
+                <td>利息和</td>
+                <td><input id="lixihe" type="text"></td>
+                <td>￥</td>
+            </tr>
+            <tr>
+                <td>本息和</td>
+                <td><input id="benxihe" type="text"></td>
+                <td>￥</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<div>
+    <table class="box3">
+        <tr>
+            <td bgcolor="#d3d3d3" colspan='3'><strong style="color: black;font-size: large">寻人寻亲寻友启事广告</strong></td>
+            <!--TODO：做成上下翻飞的-->
+        </tr>
+        <tr>
+            <td width='10%'>
+                被寻者
+            </td>
+            <td width='70%'>
+                描述
+            </td>
+            <td width='20%'>
+                寻人者联系方式
+            </td>
+        </tr>
+        <tr>
+            <td id="bxz1">
+                马之云
+            </td>
+            <td id="des1">
+                阿里巴巴与四十大盗
+            </td>
+            <td id="hao1">
+                微信号:13830885874
+            </td>
+        </tr>
+        <tr>
+            <td id="bxz2">
+                马沸腾
+            </td>
+            <td id="des2">
+                企鹅企鹅
+            </td>
+            <td id="hao2">
+                QQ号:13830885874
+            </td>
+        </tr>
+        <tr>
+            <td>
+                马伟华
+            </td>
+            <td>
+                招商很行建设很行
+            </td>
+            <td>
+                支付宝:00544 44944
+            </td>
+        </tr>
+    </table>
+    <h5 style="color: pink">公益广告</h5>
+    <img src="./mysite/icon/bg1s.jpg">
+</div>
+
+<div>
+    <h3 id="jianyi">寻人留言或联系我们:</h3>
+    <form action="login.html" id="jianyineirong" method="post">
+        被寻人名<b style="color: orangered">*</b>：<input id="bxzname" name="name" placeholder="被寻人的名字" size="30"
+                                                     type="text"><br>
+        联系方式<b style="color: orangered">*</b>：<input id="hao" name="haoma" placeholder="微信号或手机号" size="30"
+                                                     type="text"><br>
+        <textarea cols="47" id="leavemessage" placeholder="寻人描述或留言内容：" rows="10"></textarea>
+        <br>
+        <input type="submit">
+        <input type="reset" value="清空">
+    </form>
+
+</div>
+<br>
+<br>
+<br>
+<br>
+
+<div id="foot">
+    <div><img height="137" id="footgognshang" src="./mysite/icon/8.png" width="100"></div>
+    <div id="footbeizhu" style="padding-left: 25%;padding-top: 3.5%">
+        Copyright@港桥新城网事 | 公益广告：节约粮食<br>
+        联系方式: 微信号:5559899898797 | 地址: 重庆渝中区中山路街道办事处<br>
+        电话：023-49001100 | 邮编：402359 | 电子邮箱：023-49001100@163.com
+    </div>
+    <img height="100" src="./mysite/icon/9.jpg" style="padding-left: 30%;padding-top: 13px" width="94">
+</div>
+
+</body>
+
+
+<script src="./mysite/addition/js.js"></script>
+
+
+</html>

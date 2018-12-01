@@ -1,0 +1,87 @@
+
+input#first, input#second, input#result {
+    text-align: right;
+    color: black;
+    background-color: antiquewhite;
+}
+
+* {
+    margin: 1px;
+    padding: 0;
+}
+
+.box {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-left: 0;
+    margin-top: 0;
+    color: lightcyan;
+    white-space: nowrap;
+    overflow: hidden;
+    /*width: 100%;*/
+    background: indianred;
+}
+
+td {
+    text-align: center;
+}
+
+.box2 {
+    background-image: url("../icon/zt1.jpg");
+    width: 100%;
+    background-size: contain;
+    margin-left: 0;
+    margin-top: 0;
+    /*color: lightcyan;*/
+    white-space: nowrap;
+    overflow: hidden;
+    /*background: white;*/
+}
+
+#subao td {
+    padding-top: 10px;
+    padding-bottom: 5px;
+    color: black;
+    font: normal bold large "Times New Roman";
+}
+
+#toutiao {
+    padding-right: 5px;
+    font: normal bold large "Times New Roman"
+}
+
+#footgognshang, #footbeizhu, #jisuanqi {
+    float: left;
+}
+
+#lixijisuanqi {
+    float: right;
+}
+
+#logo1, #logo2, #logo3, #logo4 {
+    float: left;
+    font-size: large;
+}
+
+/*#logo5{*/
+/*float: right;*/
+/*}*/
+
+.box3 {
+    padding-top: 20px;
+    width: 50%;
+    line-height: 120%;
+}
+
+.box3 tr:nth-child(odd) {
+    background: gray;
+    color: floralwhite;
+}
+
+.box3 tr:nth-child(even) {
+    background: #d9d9d9;
+}
+
+a#luntan {
+    text-decoration: none;
+}
