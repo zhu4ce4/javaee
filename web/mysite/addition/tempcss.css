@@ -1,25 +1,15 @@
 
-input#first, input#second, input#result {
-    text-align: right;
-    color: black;
-    background-color: antiquewhite;
-}
-
 * {
-    margin: 1px;
-    padding: 0;
+    margin: 0;
+    /*padding: 0;*/
 }
 
 .box {
-    padding-top: 2px;
-    padding-bottom: 2px;
-    margin-left: 0;
-    margin-top: 0;
     color: lightcyan;
     white-space: nowrap;
     overflow: hidden;
-    /*width: 100%;*/
     background: indianred;
+    font-size: larger;
 }
 
 td {
@@ -30,12 +20,8 @@ td {
     background-image: url("../icon/zt1.jpg");
     width: 100%;
     background-size: contain;
-    margin-left: 0;
-    margin-top: 0;
-    /*color: lightcyan;*/
     white-space: nowrap;
     overflow: hidden;
-    /*background: white;*/
 }
 
 #subao td {
@@ -50,7 +36,12 @@ td {
     font: normal bold large "Times New Roman"
 }
 
-#footgognshang, #footbeizhu, #jisuanqi {
+div img {
+    margin-top: 5px;
+}
+
+
+#footgognshang, #footbeizhu, #jisuanqi, #footbei {
     float: left;
 }
 
@@ -63,23 +54,8 @@ td {
     font-size: large;
 }
 
-/*#logo5{*/
-/*float: right;*/
-/*}*/
-
 .box3 {
-    padding-top: 20px;
     width: 50%;
-    line-height: 120%;
-}
-
-.box3 tr:nth-child(odd) {
-    background: gray;
-    color: floralwhite;
-}
-
-.box3 tr:nth-child(even) {
-    background: #d9d9d9;
 }
 
 a#luntan {

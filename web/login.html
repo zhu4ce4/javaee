@@ -13,19 +13,19 @@
 <!--因为浏览器指定了以二进制的形式提交数据，那么就不能通过常规的手段获取非File字段：
 也即accountname和password不能通过常规的request.getParameter("accountName")来获取-->
 <form enctype="multipart/form-data" method="post">
-    账号：<input name="accountName" type="text"><br/>
+    账号：<input id="accountName" name="accountName" type="text">
+    <span id="checkResult"></span>
+    <br/>
     密码：<input name="password" type="password"><br/>
     头像：<input class="btn btn-sm" id="photo1" name="filepath" type="file">
     <input class="btn btn-default btn-sm" formaction="uploadPhoto" type="submit" value="上传(最大1M)">
     <img id="usersPhoto" src="" style="width:100px;height:75px;">
     <br/>
 
-    <!--todo:需连接数据库核实是否有重复账号-->
     <input class="btn btn-primary" formaction="register" type="submit" value="注册">
     <!--todo:需核实数据库内能否查找到对应账号及密码-->
     <input class="btn btn-primary" formaction="login" type="submit" value="登录">
 </form>
-
 
 <!--客户上传头像缩略图实时展现-->
 <script language="JavaScript">
@@ -39,6 +39,47 @@
                 };
                 reader.readAsDataURL(file);
             }
+        });
+    });
+
+    // $(function () {
+    //     //用keyup而不是onkeyup
+    //     $("#accountName").keyup(function () {
+    //         var name = document.getElementById("accountName").value;
+    //         var url = "RegisterableServlet";
+    //         var data = {"checkName": JSON.stringify(name)};
+    //         $.post(url, data,function (result,status) {
+    //             if (result === "ok") {
+    //                 alert("good!!");
+    //             // if (result === "ok" && status===200) {
+    //                 $("#checkResult").innerHTML = "账户名可以使用";
+    //             } else {
+    //                 $("#checkResult").innerHTML = "已有账户名,请重新输入";
+    //             }
+    //         });
+    //     })
+    // })
+
+    $(function () {
+        $("#accountName").on("keyup", function () {
+            var name = document.getElementById("accountName").value;
+            $.ajax({
+                url: "RegisterableServlet",
+                type: "post",
+                async: true,
+                cache: false,
+                data: {"name": name},
+                success: function (data) {
+                    //服务器返回了响应,不管是否重复账号名,都到此
+                    document.getElementById("checkResult").innerHTML = data;
+                    // $("#checkResult").innerHTML =data ;
+                },
+                error: function (error) {
+                    //只有服务器发生故障才能到此
+                    document.getElementById("checkResult").innerHTML = error + " 请稍后再试!";
+                    // $("#checkResult").innerHTML = error;
+                }
+            });
         });
     });
 </script>

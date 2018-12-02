@@ -25,15 +25,24 @@
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
 
-    <!--<servlet>-->
-    <!--<servlet-name>UploadPhotoServlet</servlet-name>-->
-    <!--<servlet-class>UploadPhotoServlet</servlet-class>-->
-    <!--</servlet>-->
+    <servlet>
+        <servlet-name>GiveMesServlet</servlet-name>
+        <servlet-class>GiveMesServlet</servlet-class>
+    </servlet>
 
-    <!--<servlet-mapping>-->
-    <!--<servlet-name>UploadPhotoServlet</servlet-name>-->
-    <!--<url-pattern>/uploadPhoto</url-pattern>-->
-    <!--</servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>GiveMesServlet</servlet-name>
+        <url-pattern>/missme</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>RegisterableServlet</servlet-name>
+        <servlet-class>RegisterableServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>RegisterableServlet</servlet-name>
+        <url-pattern>/RegisterableServlet</url-pattern>
+    </servlet-mapping>
 
 </web-app>

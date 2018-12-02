@@ -2,30 +2,27 @@
 <html>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 <title>港桥新城网事</title>
-<!--<script src="../jquery-3.3.1.js"></script>-->
-<!--<link href="../css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">-->
-<!--<script src="../js/bootstrap/3.3.6/bootstrap.min.js"></script>-->
+<script src="mysite/addition/jquery-3.3.1.js"></script>
+<link href="mysite/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+<script src="mysite/js/bootstrap/3.3.6/bootstrap.min.js"></script>
 <head>
     <link href="./mysite/addition/tempcss.css" rel="stylesheet" type="text/css"/>
 </head>
 
 <body onload="scroll();">
 
-<div class="box" style="margin-right: 1px">
+<div class="box" style="margin-right: 1px;padding-top: 5px">
     <div class="content">
-        <marquee behavior=alternate scrollamount="5">***本港最大社交门户 港桥新城网事
-            欢迎您!***寻人寻亲寻友启事公告广告招聘咨询服务贷款***商务事宜请联系助理(微信):dongdongwoshishi
+        <marquee behavior=alternate scrollamount="2">***本港最大社交门户 港桥新城网事
+            欢迎您!***寻人寻亲寻友启事公告广告招聘咨询服务贷款***商务事宜请联系助理(微信):dongdongwoshishi 关注微信公众号：动动我试试
         </marquee>
     </div>
 </div>
-<hr>
-
-<div class="box2" style="margin-right: 1px">
+<div class="box2">
     <h4 style="color: black">古今多少事 都付笑谈中 </h4>
-    <h1 style="color: black">本期封面 特别推荐-->&nbsp&nbsp&nbsp&nbsp&nbsp迷雾中的港桥古镇</h1>
+    <h2 style="color: black">本期封面 特别推荐-->&nbsp&nbsp&nbsp&nbsp&nbsp迷雾中的港桥古镇</h2>
     <img align="left" src="./mysite/icon/gq.jpg" width="50%"/>
 </div>
-<hr>
 
 <div>
     <table id="toutiao" width="100%">
@@ -47,9 +44,9 @@
     </table>
 </div>
 <div>
-    <img src="./mysite/icon/4.jpg" style="margin-top: 5px" width=100%>
-    <img src="./mysite/icon/5.jpg" style="margin-top: 5px" width=100%>
-    <img src="./mysite/icon/6.jpg" style="margin-top: 5px" width=100%>
+    <img src="./mysite/icon/4.jpg" width=100%>
+    <img src="./mysite/icon/5.jpg" width=100%>
+    <img src="./mysite/icon/6.jpg" width=100%>
 </div>
 <hr/>
 <table border=0 cellPadding=0 cellSpacing=0 style="line-height: 120%;font-size: larger" width="100%">
@@ -60,7 +57,7 @@
         <td width=20%>收评：沪指走低跌1.39%失守2600 本周累计跌2.9%</td>
         <td id="datetimenow" width=20%></td>
         <td width=20%>今天天气：晴</td>
-        <td style="text-align: left"><img src="./mysite/icon/qingtian.PNG"></td>
+        <td><img src="./mysite/icon/qingtian.PNG"></td>
     </tr>
     <!--todo:上翻效果-->
 </table>
@@ -99,11 +96,10 @@
                                                                   width="98"></div>
     <div style="text-align: right"><img height="77" id="logo5" src="./mysite/icon/2.png" width="240"></div>
 </div>
-
 <hr>
 
 <div>
-    <div id="jisuanqi" style="margin-right: 50px;margin-top: 50px">+_*/计算器
+    <div id="jisuanqi" style="margin-right: 50px;padding-top: 20px">+_*/计算器
         <input id="first" placeholder="0" size="4" type="text">
         <select id="mym">
             <option id="add" value="add">+</option>
@@ -112,12 +108,15 @@
             <option id="divided" value="divided">/</option>
         </select>
         <input id="second" placeholder="0" size="4" type="text">
-        <button onclick="getResult()" type="button">等于</button>
+        <button class="btn-info" onclick="getResult()" type="button">等于</button>
         <input id="result" placeholder="0" size="8" type="text">
-        <button onclick="resetInput()" type="button">清空</button>  <!--onclick="clear()"错误，因为clear是关键字！-->
+        <button class="btn-default" onclick="resetInput()" type="button">清空</button>
+        <!--onclick="clear()"错误，因为clear是关键字！-->
+        <h5 style="color: pink;padding-top: 10px">公益广告</h5>
+        <img src="./mysite/icon/bg1s.jpg">
     </div>
     <div>
-        <table id='lixijisuanqi' style="border-collapse: collapse;margin-top: 10px">
+        <table id='lixijisuanqi' style="margin-top: 10px;margin-right: 20px">
             <tr>
                 <td>起始资金</td>
                 <td><input id="origin" type="text" value="0"></td>
@@ -140,7 +139,9 @@
             </tr>
             <tr>
                 <td align="center" colspan="3">
-                    <button onclick="compute()" style="width: 20%;text-align: center" type="button">计算</button>
+                    <button class="btn-default" onclick="compute()" style="width: 20%;text-align: center" type="button">
+                        计算
+                    </button>
                 </td>
             </tr>
             <tr>
@@ -162,11 +163,12 @@
     </div>
 </div>
 
-
 <div>
-    <table class="box3">
+    <table class="box3 table-striped table-hover">
         <tr>
-            <td bgcolor="#d3d3d3" colspan='3'><strong style="color: black;font-size: large">寻人寻亲寻友启事广告</strong></td>
+            <td colspan='3'>
+                <marquee behavior=alternate scrollamount="10">寻人寻亲寻友启事广告</marquee>
+            </td>
             <!--TODO：做成上下翻飞的-->
         </tr>
         <tr>
@@ -213,22 +215,51 @@
                 支付宝:00544 44944
             </td>
         </tr>
+        <tr>
+            <td>
+                马伟华
+            </td>
+            <td>
+                招商很行建设很行
+            </td>
+            <td>
+                支付宝:00544 44944
+            </td>
+        </tr>
+        <tr>
+            <td>
+                马伟华
+            </td>
+            <td>
+                招商很行建设很行
+            </td>
+            <td>
+                支付宝:00544 44944
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <button class="btn-info" type="submit">上一页</button>
+                <button class="btn-info" type="submit">下一页</button>
+                <button class="btn-info" type="submit">首页</button>
+            </td>
+        </tr>
     </table>
-    <h5 style="color: pink">公益广告</h5>
-    <img src="./mysite/icon/bg1s.jpg">
+
 </div>
 
 <div>
-    <h3 id="jianyi">寻人留言或联系我们:</h3>
-    <form action="login.html" id="jianyineirong" method="post">
-        被寻人名<b style="color: orangered">*</b>：<input id="bxzname" name="name" placeholder="被寻人的名字" size="30"
-                                                     type="text"><br>
-        联系方式<b style="color: orangered">*</b>：<input id="hao" name="haoma" placeholder="微信号或手机号" size="30"
-                                                     type="text"><br>
-        <textarea cols="47" id="leavemessage" placeholder="寻人描述或留言内容：" rows="10"></textarea>
+    <h3 id="jianyi">留言或联系我们:</h3>
+    <form id="jianyineirong" method="post">
+        被寻人名<b style="color: orangered">*</b>：
+        <input id="bxzname" name="bxzname" placeholder="被寻人的名字" size="30" type="text"><br>
+        联系方式<b style="color: orangered">*</b>：
+        <input id="hao" name="haoma" placeholder="微信号或手机号" size="30" type="text"><br>
+        <textarea cols="47" id="leavemessage" name="leavemessage" placeholder="寻人描述或留言内容：(不超过100个字)"
+                  rows="10"></textarea>
         <br>
-        <input type="submit">
-        <input type="reset" value="清空">
+        <input class="btn-primary" formaction="missme" type="submit">
+        <input class="btn-default" type="reset" value="清空">
     </form>
 
 </div>
@@ -238,13 +269,14 @@
 <br>
 
 <div id="foot">
-    <div><img height="137" id="footgognshang" src="./mysite/icon/8.png" width="100"></div>
-    <div id="footbeizhu" style="padding-left: 25%;padding-top: 3.5%">
+    <div id="footgognshang"><img height="137" src="./mysite/icon/8.png" width="100"></div>
+    <div id="footbeizhu" style="padding-left: 25%;padding-top: 80px">
         Copyright@港桥新城网事 | 公益广告：节约粮食<br>
         联系方式: 微信号:5559899898797 | 地址: 重庆渝中区中山路街道办事处<br>
         电话：023-49001100 | 邮编：402359 | 电子邮箱：023-49001100@163.com
     </div>
-    <img height="100" src="./mysite/icon/9.jpg" style="padding-left: 30%;padding-top: 13px" width="94">
+    <div id="footbei" style="margin-top: 2%;margin-right: 10px"><img height="100" src="./mysite/icon/9.jpg" width="94">
+    </div>
 </div>
 
 </body>
