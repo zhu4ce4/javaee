@@ -12,7 +12,6 @@ public class MissMeServlet extends HttpServlet {
 
 
 //        try {
-//            request.setCharacterEncoding("UTF-8");
 //            response.setContentType("text/html;charset=UTF-8");
 //
 //            String looked = request.getParameter("bxzname");

@@ -9,8 +9,6 @@
     <link href="./mysite/addition/tempcss.css" rel="stylesheet" type="text/css"/>
 </head>
 
-<body onload="scroll();">
-
 <div class="box" style="margin-right: 1px;padding-top: 5px">
     <div class="content">
         <marquee behavior=alternate scrollamount="2">***本港最大社交门户 港桥新城网事
@@ -59,7 +57,7 @@
         <td width=20%>今天天气：晴</td>
         <td><img src="./mysite/icon/qingtian.PNG"></td>
     </tr>
-    <!--todo:上翻效果-->
+    <!--todo:上翻跑马灯效果-->
 </table>
 <script>
     var intYears, intMonths, intDays, intHours, intMinutes;
@@ -98,78 +96,126 @@
 </div>
 <hr>
 
-<div>
-    <div id="jisuanqi" style="margin-right: 50px;padding-top: 20px">+_*/计算器
-        <input id="first" placeholder="0" size="4" type="text">
-        <select id="mym">
-            <option id="add" value="add">+</option>
-            <option id="minus" value="minus">-</option>
-            <option id="multiply" value="multiply">*</option>
-            <option id="divided" value="divided">/</option>
-        </select>
-        <input id="second" placeholder="0" size="4" type="text">
-        <button class="btn-info" onclick="getResult()" type="button">等于</button>
-        <input id="result" placeholder="0" size="8" type="text">
-        <button class="btn-default" onclick="resetInput()" type="button">清空</button>
-        <!--onclick="clear()"错误，因为clear是关键字！-->
-        <h5 style="color: pink;padding-top: 10px">公益广告</h5>
-        <img src="./mysite/icon/bg1s.jpg">
-    </div>
-    <div>
-        <table id='lixijisuanqi' style="margin-top: 10px;margin-right: 20px">
-            <tr>
-                <td>起始资金</td>
-                <td><input id="origin" type="text" value="0"></td>
-                <td>￥</td>
-            </tr>
-            <tr>
-                <td>每年收益</td>
-                <td><input id="rate" type="text" value="5"></td>
-                <td>%</td>
-            </tr>
-            <tr>
-                <td>投资年数</td>
-                <td><input id="years" type="text" value="10"></td>
-                <td>年</td>
-            </tr>
-            <tr>
-                <td>每年追加资金</td>
-                <td><input id="benjin" type="text" value="10000"></td>
-                <td>￥</td>
-            </tr>
-            <tr>
-                <td align="center" colspan="3">
-                    <button class="btn-default" onclick="compute()" style="width: 20%;text-align: center" type="button">
-                        计算
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>本金和</td>
-                <td><input id="amountOfBenjin" type="text"></td>
-                <td>￥</td>
-            </tr>
-            <tr>
-                <td>利息和</td>
-                <td><input id="lixihe" type="text"></td>
-                <td>￥</td>
-            </tr>
-            <tr>
-                <td>本息和</td>
-                <td><input id="benxihe" type="text"></td>
-                <td>￥</td>
-            </tr>
-        </table>
-    </div>
+<div id="jisuanqi" style="margin-right: 50px;padding-top: 20px;float: left">+_*/计算器
+    <input class="btn-default" id="first" placeholder="0" size="4" type="text">
+    <select id="mym">
+        <option id="add" value="add">+</option>
+        <option id="minus" value="minus">-</option>
+        <option id="multiply" value="multiply">*</option>
+        <option id="divided" value="divided">/</option>
+    </select>
+    <input class="btn-default" id="second" placeholder="0" size="4" type="text">
+    <button class="btn-success" onclick="getResult()" type="button">等于</button>
+    <input class="btn-default" id="result" placeholder="0" size="8" type="text">
+    <button class="btn-default" onclick="resetInput()" type="button">清空</button>
+    <!--onclick="clear()"错误，因为clear是关键字！-->
+    <h5 style="color: pink;padding-top: 10px">公益广告</h5>
+    <img src="./mysite/icon/bg1s.jpg">
+    <img src="./mysite/icon/bg1s.jpg">
+    <img src="./mysite/icon/bg1s.jpg">
+    <img src="./mysite/icon/bg1s.jpg">
+    <img src="./mysite/icon/bg1s.jpg">
+    <img src="./mysite/icon/bg1s.jpg">
+    <img src="./mysite/icon/bg1s.jpg">
+    <img src="./mysite/icon/bg1s.jpg">
 </div>
 
+<table id='lixijisuanqi' style="float: left;">
+    <tr>
+        <td>起始资金</td>
+        <td><input id="origin" type="text" value="0"></td>
+        <td>￥</td>
+    </tr>
+    <tr>
+        <td>每年收益</td>
+        <td><input id="rate" type="text" value="5"></td>
+        <td>%</td>
+    </tr>
+    <tr>
+        <td>投资年数</td>
+        <td><input id="years" type="text" value="10"></td>
+        <td>年</td>
+    </tr>
+    <tr>
+        <td>每年追加资金</td>
+        <td><input id="benjin" type="text" value="10000"></td>
+        <td>￥</td>
+    </tr>
+    <tr>
+        <td align="center" colspan="3">
+            <button class="btn-success" onclick="compute()" style="width: 20%;text-align: center" type="button">
+                计算
+            </button>
+        </td>
+    </tr>
+    <tr>
+        <td>本金和</td>
+        <td><input id="amountOfBenjin" type="text"></td>
+        <td>￥</td>
+    </tr>
+    <tr>
+        <td>利息和</td>
+        <td><input id="lixihe" type="text"></td>
+        <td>￥</td>
+    </tr>
+    <tr>
+        <td>本息和</td>
+        <td><input id="benxihe" type="text"></td>
+        <td>￥</td>
+    </tr>
+</table>
+
+<!--<div style="width: 50%;">-->
+<table class="table table-striped table-hover" style="width: 45%;margin-right: 1%;float: right">
+    <tr>
+        <td colspan="3" style="background-color: ghostwhite;font-size: x-large">面向未来</td>
+    </tr>
+    <tr>
+        <td>阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮</td>
+    </tr>
+    <tr>
+        <td>阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮</td>
+    </tr>
+    <tr>
+        <td>阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮</td>
+    </tr>
+    <tr>
+        <td>阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮</td>
+    </tr>
+    <tr>
+        <td>阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮</td>
+    </tr>
+    <tr>
+        <td>阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮</td>
+    </tr>
+    <tr>
+        <td>阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮</td>
+    </tr>
+    <tr>
+        <td>阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮</td>
+    </tr>
+    <tr>
+        <td>阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮</td>
+    </tr>
+    <tr>
+        <td>阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮</td>
+    </tr>
+    <tr>
+        <td>
+            <button class="btn btn-success" type="submit">更多</button>
+        </td>
+    </tr>
+</table>
+
+<hr>
+
 <div>
-    <table class="box3 table-striped table-hover">
+
+    <table class="box3 table-striped table-hover" style="width: 45.5%">
         <tr>
-            <td colspan='3'>
+            <td colspan='3' style="font-size: x-large">
                 <marquee behavior=alternate scrollamount="10">寻人寻亲寻友启事广告</marquee>
             </td>
-            <!--TODO：做成上下翻飞的-->
         </tr>
         <tr>
             <td width='10%'>
@@ -187,7 +233,7 @@
                 马之云
             </td>
             <td id="des1">
-                阿里巴巴与四十大盗
+                阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮
             </td>
             <td id="hao1">
                 微信号:13830885874
@@ -198,7 +244,7 @@
                 马沸腾
             </td>
             <td id="des2">
-                企鹅企鹅
+                阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮
             </td>
             <td id="hao2">
                 QQ号:13830885874
@@ -209,7 +255,7 @@
                 马伟华
             </td>
             <td>
-                招商很行建设很行
+                阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮
             </td>
             <td>
                 支付宝:00544 44944
@@ -220,7 +266,7 @@
                 马伟华
             </td>
             <td>
-                招商很行建设很行
+                阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮
             </td>
             <td>
                 支付宝:00544 44944
@@ -231,7 +277,7 @@
                 马伟华
             </td>
             <td>
-                招商很行建设很行
+                阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮阿里巴巴与四十大盗狮
             </td>
             <td>
                 支付宝:00544 44944
@@ -249,23 +295,25 @@
 </div>
 
 <div>
-    <h3 id="jianyi">留言或联系我们:</h3>
-    <form id="jianyineirong" method="post">
-        被寻人名<b style="color: orangered">*</b>：
-        <input id="bxzname" name="bxzname" placeholder="被寻人的名字" size="30" type="text"><br>
-        联系方式<b style="color: orangered">*</b>：
-        <input id="hao" name="haoma" placeholder="微信号或手机号" size="30" type="text"><br>
-        <textarea cols="47" id="leavemessage" name="leavemessage" placeholder="寻人描述或留言内容：(不超过100个字)"
-                  rows="10"></textarea>
-        <br>
-        <button class="btn-primary" name="MissMeServlet" type="submit">提交</button>
-        <input class="btn-default" type="reset" value="清空">
-    </form>
+    <div>
+        <form id="jianyineirong" method="post" style="width: 50%;">
+            <h3 class="bg-primary" id="jianyi" style="width: 30%">爆料/寻人/联系我们</h3>
+            被寻人名<b style="color: orangered">*</b>：
+            <input id="bxzname" name="bxzname" placeholder="被寻人的名字" size="30" type="text"><br>
+            联系方式<b style="color: orangered">*</b>：
+            <input id="hao" name="haoma" placeholder="微信号或手机号" size="30" type="text"><br>
+            <textarea cols="47" id="leavemessage" name="leavemessage" placeholder="寻人描述或留言内容：(不超过100个字)"
+                      rows="10"></textarea>
+            <br>
+            <button class="btn-success" name="MissMeServlet" type="submit">提交</button>
+            <input class="btn-default" type="reset" value="清空">
+        </form>
 
+        <!--todo:再增加一个表单验证,修改为用ajax发送-->
+    </div>
 </div>
-<br>
-<br>
-<br>
+
+
 <br>
 
 <div id="foot">

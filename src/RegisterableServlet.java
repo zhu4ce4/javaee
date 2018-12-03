@@ -8,7 +8,6 @@ public class RegisterableServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
-        request.setCharacterEncoding("UTF-8");
 
         String nameTobeChecked = request.getParameter("name");
         if (UserDAO.registerable(nameTobeChecked)) {

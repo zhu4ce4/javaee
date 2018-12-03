@@ -8,7 +8,6 @@ import java.rmi.ServerException;
 public class LoginServlet extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException, ServletException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
 
         String nameTobeChecked = request.getParameter("name");
         String passwordTobeChecked = request.getParameter("password");

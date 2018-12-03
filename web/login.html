@@ -16,11 +16,11 @@
 也即accountname和password不能通过常规的request.getParameter("accountName")来获取-->
 <form enctype="multipart/form-data" id="registerAndLogin" method="post">
     <label for="accountName">昵称：</label>
-    <input id="accountName" name="accountName" type="text">
+    <input class="btn-default" id="accountName" name="accountName" type="text">
     <span id="checkResult"></span>
     <br/>
     <label for="password">密码：</label>
-    <input class="password" id="password" name="password" type="password"><br/>
+    <input class="password" class="btn-default" id="password" name="password" type="password"><br/>
 
 
     <!--http://www.runoob.com/jquery/jquery-plugin-password-validation.html密码验证-->
@@ -37,7 +37,8 @@
     <!--equalTo用于比较2个输入框的值，故只能设置为input而非其他-->
     <input class="btn disabled btn-danger randomCode" id="randomCode" name="randomCode" style="width: 60px">
 
-    <input class="confirmCode" id="confirmCode" name="confirmCode" placeholder="请输入左侧验证码" style="width: 115px"
+    <input class="confirmCode btn-default" id="confirmCode" name="confirmCode" placeholder="请输入左侧验证码"
+           style="width: 120px"
            type="text">
 
     <br>
@@ -45,11 +46,11 @@
     <span id="logResult"></span>
     <br>
     <label for="password_again">密码：</label>
-    <input class="left" id="password_again" name="password_again" type="password"/><br/>
+    <input class="left btn-default" id="password_again" name="password_again" type="password"/><br/>
     <label>头像：</label>
     <input id="userPhoto" name="filepath" type="file">
     <!--todo:若客户未上传头像，则使用默认头像-->
-    <img id="usersPhoto" src="" style="width:100px;height:75px;">
+    <img id="usersPhoto" src="./mysite/icon/defaultPhoto.jpg" style="width:100px;height:100px;">
     <br>
     <button class="btn btn-primary" id="register">注册</button>
     <span id="registerResult"></span>
