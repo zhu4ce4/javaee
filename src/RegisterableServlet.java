@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.rmi.ServerException;
 
-
 public class RegisterableServlet extends HttpServlet {
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException {
         response.setContentType("text/html");
@@ -13,9 +12,9 @@ public class RegisterableServlet extends HttpServlet {
 
         String nameTobeChecked = request.getParameter("name");
         if (UserDAO.registerable(nameTobeChecked)) {
-            response.getWriter().print("<b>账户名可以使用</b>");
+            response.getWriter().print("<b>昵称可以使用</b>");
         } else {
-            response.getWriter().print("<b style=\"color: red\">账户名已被注册,请重新输入</b>");
+            response.getWriter().print("<b style='color: red'>昵称已被注册,请重新输入</b>");
         }
     }
 }

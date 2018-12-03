@@ -3,8 +3,6 @@
          xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-
-
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>LoginServlet</servlet-class>
@@ -12,7 +10,8 @@
 
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
+        <!--如果是ajax直接发送的,需要保证url域servlet名字一致!必须和reqeust发出来的url一致!!!-->
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -22,17 +21,17 @@
 
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/register</url-pattern>
+        <url-pattern>/Register</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>GiveMesServlet</servlet-name>
-        <servlet-class>GiveMesServlet</servlet-class>
+        <servlet-name>MissMeServlet</servlet-name>
+        <servlet-class>MissMeServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>GiveMesServlet</servlet-name>
-        <url-pattern>/missme</url-pattern>
+        <servlet-name>MissMeServlet</servlet-name>
+        <url-pattern>/MissMe</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -42,7 +41,8 @@
 
     <servlet-mapping>
         <servlet-name>RegisterableServlet</servlet-name>
-        <url-pattern>/RegisterableServlet</url-pattern>
+        <!--如果是ajax直接发送的,需要保证url域servlet名字一致-->
+        <url-pattern>/Registerable</url-pattern>
     </servlet-mapping>
 
 </web-app>

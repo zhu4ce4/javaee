@@ -31,37 +31,34 @@ function resetInput() {
     document.getElementById('result').value = '';
 }
 
-
-let [box, content, text] = [
-    document.querySelector('.box'),
-    document.querySelector('.content'),
-    document.querySelector('.text')
-];
-let [textWidth, boxWidth] = [
-    text.offsetWidth,
-    box.offsetWidth
-];
-window.onload = function checkScrollLeft() {
-    content.innerHTML += content.innerHTML;
-    document.querySelector('.text').classList.add('padding');
-    // 更新
-    textWidth = document.querySelector('.text').offsetWidth;
-    toScrollLeft()
-};
-
-function toScrollLeft() {
-    // for (let i = 0; i <3; i++) {
-    box.scrollLeft++;
-    setTimeout('toScrollLeft()', 40);
-    // }
-}
+// var box = document.querySelector('.box');
+// var content = document.querySelector('.content');
+// var text = document.querySelector('.text');
+//
+// var textWidth = text.offsetWidth;
+// var boxWidth=box.offsetWidth;
+//
+// window.onload = function checkScrollLeft() {
+//     content.innerHTML += content.innerHTML;
+//     document.querySelector('.text').classList.add('padding');
+//     // 更新
+//     textWidth = document.querySelector('.text').offsetWidth;
+//     toScrollLeft()
+// };
+//
+// function toScrollLeft() {
+//     // for (let i = 0; i <3; i++) {
+//     box.scrollLeft++;
+//     setTimeout('toScrollLeft()', 40);
+//     // }
+// }
 
 
 function compute() {
-    const qishimoney = parseFloat(document.getElementById('origin').value);
-    const rate = parseFloat(document.getElementById('rate').value);
+    var qishimoney = parseFloat(document.getElementById('origin').value);
+    var rate = parseFloat(document.getElementById('rate').value);
     var years = parseInt(document.getElementById('years').value);
-    const appendmoney = parseFloat(document.getElementById('benjin').value);
+    var appendmoney = parseFloat(document.getElementById('benjin').value);
 
     var benjinhe = qishimoney + appendmoney * years;
     document.getElementById('amountOfBenjin').value = benjinhe;

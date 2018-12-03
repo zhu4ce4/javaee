@@ -6,83 +6,58 @@
     <script src="mysite/addition/jquery-3.3.1.js"></script>
     <link href="mysite/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet"/>
     <script src="mysite/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+    <script src="mysite/addition/jquery.validate.min.js"></script>
+    <script src="mysite/addition/additional-methods.min.js"></script>
 </head>
 <body>
-<h1>论坛登录/注册</h1>
+<h1 class="text-info">论坛登录/注册</h1>
 
 <!--因为浏览器指定了以二进制的形式提交数据，那么就不能通过常规的手段获取非File字段：
 也即accountname和password不能通过常规的request.getParameter("accountName")来获取-->
-<form enctype="multipart/form-data" method="post">
-    账号：<input id="accountName" name="accountName" type="text">
+<form enctype="multipart/form-data" id="registerAndLogin" method="post">
+    <label for="accountName">昵称：</label>
+    <input id="accountName" name="accountName" type="text">
     <span id="checkResult"></span>
     <br/>
-    密码：<input name="password" type="password"><br/>
-    头像：<input class="btn btn-sm" id="photo1" name="filepath" type="file">
-    <input class="btn btn-default btn-sm" formaction="uploadPhoto" type="submit" value="上传(最大1M)">
-    <img id="usersPhoto" src="" style="width:100px;height:75px;">
-    <br/>
+    <label for="password">密码：</label>
+    <input class="password" id="password" name="password" type="password"><br/>
 
-    <input class="btn btn-primary" formaction="register" type="submit" value="注册">
-    <!--todo:需核实数据库内能否查找到对应账号及密码-->
-    <input class="btn btn-primary" formaction="login" type="submit" value="登录">
+
+    <!--http://www.runoob.com/jquery/jquery-plugin-password-validation.html密码验证-->
+    <!--<div class="password-meter">-->
+    <!--<div class="password-meter-message"></div>-->
+    <!--<div class="password-meter-bg">-->
+    <!--<div class="password-meter-bar"></div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<input class="btn btn-primary btn-xs" id="login" value="登录">-->
+    <label for="confirmCode">验证：</label>
+    <!--<label for="randomCode" class="randomCode"></label>-->
+    <!--equalTo用于比较2个输入框的值，故只能设置为input而非其他-->
+    <input class="btn disabled btn-danger randomCode" id="randomCode" name="randomCode" style="width: 60px">
+
+    <input class="confirmCode" id="confirmCode" name="confirmCode" placeholder="请输入左侧验证码" style="width: 115px"
+           type="text">
+
+    <br>
+    <button class="btn btn-primary" id="login">登录</button>
+    <span id="logResult"></span>
+    <br>
+    <label for="password_again">密码：</label>
+    <input class="left" id="password_again" name="password_again" type="password"/><br/>
+    <label>头像：</label>
+    <input id="userPhoto" name="filepath" type="file">
+    <!--todo:若客户未上传头像，则使用默认头像-->
+    <img id="usersPhoto" src="" style="width:100px;height:75px;">
+    <br>
+    <button class="btn btn-primary" id="register">注册</button>
+    <span id="registerResult"></span>
+    <!--<button class="btn btn-primary" id="register" type="submit">注册</button>-->
+    <!--不能有submit-->
 </form>
 
-<!--客户上传头像缩略图实时展现-->
-<script language="JavaScript">
-    $(function () {
-        $("#photo1").on("change", function () {
-            var file = this.files[0];
-            if (this.files && file) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $("#usersPhoto").attr("src", e.target.result);
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    });
-
-    // $(function () {
-    //     //用keyup而不是onkeyup
-    //     $("#accountName").keyup(function () {
-    //         var name = document.getElementById("accountName").value;
-    //         var url = "RegisterableServlet";
-    //         var data = {"checkName": JSON.stringify(name)};
-    //         $.post(url, data,function (result,status) {
-    //             if (result === "ok") {
-    //                 alert("good!!");
-    //             // if (result === "ok" && status===200) {
-    //                 $("#checkResult").innerHTML = "账户名可以使用";
-    //             } else {
-    //                 $("#checkResult").innerHTML = "已有账户名,请重新输入";
-    //             }
-    //         });
-    //     })
-    // })
-
-    $(function () {
-        $("#accountName").on("keyup", function () {
-            var name = document.getElementById("accountName").value;
-            $.ajax({
-                url: "RegisterableServlet",
-                type: "post",
-                async: true,
-                cache: false,
-                data: {"name": name},
-                success: function (data) {
-                    //服务器返回了响应,不管是否重复账号名,都到此
-                    document.getElementById("checkResult").innerHTML = data;
-                    // $("#checkResult").innerHTML =data ;
-                },
-                error: function (error) {
-                    //只有服务器发生故障才能到此
-                    document.getElementById("checkResult").innerHTML = error + " 请稍后再试!";
-                    // $("#checkResult").innerHTML = error;
-                }
-            });
-        });
-    });
-</script>
+<script src="mysite/addition/loginjs.js"></script>
 
 </body>
 </html>
