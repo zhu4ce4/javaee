@@ -45,6 +45,17 @@
         <url-pattern>/Registerable</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ReadyForRenServlet</servlet-name>
+        <servlet-class>ReadyForRenServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ReadyForRenServlet</servlet-name>
+        <!--如果是ajax直接发送的,需要保证url域servlet名字一致-->
+        <url-pattern>/readyForRen</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <!--注意是filter-->
         <filter-name>EncodingFilter</filter-name>
