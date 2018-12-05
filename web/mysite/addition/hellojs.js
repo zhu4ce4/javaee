@@ -93,20 +93,41 @@ function compute() {
     document.getElementById('benxihe').value = benxihe.toFixed(2);
 }
 
-function firstPage() {
-    var myDemand = "newestFive";
-    $.ajax({
+function GetPage() {
+    //将$.ajax做成方法并命名为doAjax以便调用，调用时提供参数demand
+    this.doAjax = function (demand) {
+        $.ajax({
         url: "readyForRen",
         type: "get",
         async: false,
-        data: {"demand": myDemand},
+            data: {"demand": demand},
+            // success: function (data) {
+            //     var datas = $.parseJSON(data);
+            //     for (var i = 0; i < datas.length; i++) {
+            //         var lp = datas[i];
+            //         $("#Person" + i).html(lp.name);
+            //         $("#Describe" + i).html(lp.messages);
+            //         $("#Hao" + i).html(lp.haoma);
+            //     }
+            // },
         success: function (data) {
             var datas = $.parseJSON(data);
-            for (var i = 0; i < datas.length; i++) {
+            //length()会报错！！
+            // var length = datas.length();
+            var length = datas.length;
+            for (var i = 0; i < length; i++) {
                 var lp = datas[i];
                 $("#Person" + i).html(lp.name);
                 $("#Describe" + i).html(lp.messages);
                 $("#Hao" + i).html(lp.haoma);
+            }
+            if (length < 5) {
+                for (var j = 0; j < (5 - length); j++) {
+                    var newj = j + length;
+                    $("#Person" + newj).html("<span>&nbsp</span>");
+                    $("#Describe" + newj).html("<span>&nbsp</span>");
+                    $("#Hao" + newj).html("<span>&nbsp</span>");
+                }
             }
         },
         error: function (err) {
@@ -117,91 +138,138 @@ function firstPage() {
             }
         }
     })
+    }
 }
 
-$(document).ready(firstPage);
+
+//先生成一个page变量备用
+var page = new GetPage();
+//页面加载完成随机调用取最新5条数据方法
+$(document).ready(page.doAjax("newestFive"));
+
+$("#firstPage").on("click", function () {
+    page.doAjax("newestFive");
+});
+
+$("#lastPage").on("click", function () {
+    page.doAjax("lastFive");
+});
+$("#nextPage").on("click", function () {
+    page.doAjax("nextFive");
+});
+// 通过new Object创建对象有个问题，就是每创建一个对象，都得重新定义属性和函数。这样代码的重用性不好
+// 那么，采用另一种方式，通过function设计一种对象。 然后实例化它 。
+// 这种思路很像Java里的设计一种类，但是 javascript没有类，只有对象，所以我们叫设计一种对象
+
+// function firstPage() {
+//     var myDemand = "newestFive";
+//     $.ajax({
+//         url: "readyForRen",
+//         type: "get",
+//         async: false,
+//         data: {"demand": myDemand},
+//         success: function (data) {
+//             var datas = $.parseJSON(data);
+//             for (var i = 0; i < datas.length; i++) {
+//                 var lp = datas[i];
+//                 $("#Person" + i).html(lp.name);
+//                 $("#Describe" + i).html(lp.messages);
+//                 $("#Hao" + i).html(lp.haoma);
+//             }
+//         },
+//         error: function (err) {
+//             for (var i = 0; i < 5; i++) {
+//                 $("#Person" + i).html("内容获取失败");
+//                 $("#Describe" + i).html("内容获取失败，请刷新或稍后再试！");
+//                 $("#Hao" + i).html("内容获取失败");
+//             }
+//         }
+//     })
+// }
+
+// $(document).ready(firstPage);
 // firstPage("newestFive")有括号，该函数会在页面加载完成后立即执行,不带括号则点击后才会执行
 // $(function () {
-$("#firstPage").click(firstPage);
+// $("#firstPage").click(firstPage);
 // });
 
 
-$(function () {
-    $("#lastPage").click(function () {
-        var myDemand = "lastFive";
-        $.ajax({
-            url: "readyForRen",
-            type: "get",
-            async: false,
-            data: {"demand": myDemand},
-            success: function (data) {
-                var datas = $.parseJSON(data);
-                //length()会报错！！
-                // var length = datas.length();
-                var length = datas.length;
-                for (var i = 0; i < length; i++) {
-                    var lp = datas[i];
-                    $("#Person" + i).html(lp.name);
-                    $("#Describe" + i).html(lp.messages);
-                    $("#Hao" + i).html(lp.haoma);
-                }
-                if (length < 5) {
-                    for (var j = 0; j < (5 - length); j++) {
-                        var newj = j + length;
-                        $("#Person" + newj).html("<span>&nbsp</span>");
-                        $("#Describe" + newj).html("<span>&nbsp</span>");
-                        $("#Hao" + newj).html("<span>&nbsp</span>");
-                    }
-                }
-            },
-            error: function (err) {
-                for (var i = 0; i < 5; i++) {
-                    $("#Person" + i).html("内容获取失败");
-                    $("#Describe" + i).html("内容获取失败，请刷新或稍后再试！");
-                    $("#Hao" + i).html("内容获取失败");
-                }
-            }
-        })
-    });
-});
+// $(function () {
+//     $("#lastPage").click(function () {
+//         var myDemand = "lastFive";
+//         $.ajax({
+//             url: "readyForRen",
+//             type: "get",
+//             async: false,
+//             data: {"demand": myDemand},
+//             success: function (data) {
+//                 var datas = $.parseJSON(data);
+//                 //length()会报错！！
+//                 // var length = datas.length();
+//                 var length = datas.length;
+//                 for (var i = 0; i < length; i++) {
+//                     var lp = datas[i];
+//                     $("#Person" + i).html(lp.name);
+//                     $("#Describe" + i).html(lp.messages);
+//                     $("#Hao" + i).html(lp.haoma);
+//                 }
+//                 if (length < 5) {
+//                     for (var j = 0; j < (5 - length); j++) {
+//                         var newj = j + length;
+//                         $("#Person" + newj).html("<span>&nbsp</span>");
+//                         $("#Describe" + newj).html("<span>&nbsp</span>");
+//                         $("#Hao" + newj).html("<span>&nbsp</span>");
+//                     }
+//                 }
+//             },
+//             error: function (err) {
+//                 for (var i = 0; i < 5; i++) {
+//                     $("#Person" + i).html("内容获取失败");
+//                     $("#Describe" + i).html("内容获取失败，请刷新或稍后再试！");
+//                     $("#Hao" + i).html("内容获取失败");
+//                 }
+//             }
+//         })
+//     });
+// });
 
 
-$(function () {
-    $("#nextPage").click(function () {
-        var myDemand = "nextFive";
-        $.ajax({
-            url: "readyForRen",
-            type: "get",
-            async: false,
-            data: {"demand": myDemand},
-            success: function (data) {
-                var datas = $.parseJSON(data);
-                var length = datas.length;
-                for (var i = 0; i < length; i++) {
-                    var lp = datas[i];
-                    $("#Person" + i).html(lp.name);
-                    $("#Describe" + i).html(lp.messages);
-                    $("#Hao" + i).html(lp.haoma);
-                }
-                if (length < 5) {
-                    for (var j = 0; j < (5 - length); j++) {
-                        var newj = j + length;
-                        $("#Person" + newj).html("<span>&nbsp</span> ");
-                        $("#Describe" + newj).html("<span>&nbsp</span>");
-                        $("#Hao" + newj).html("<span>&nbsp</span>");
-                    }
-                }
-            },
-            error: function (err) {
-                for (var i = 0; i < 5; i++) {
-                    $("#Person" + i).html("内容获取失败");
-                    $("#Describe" + i).html("内容获取失败，请刷新或稍后再试！");
-                    $("#Hao" + i).html("内容获取失败");
-                }
-            }
-        })
-    });
-});
+// $(function () {
+//     $("#nextPage").click(function () {
+//         var myDemand = "nextFive";
+//         $.ajax({
+//             url: "readyForRen",
+//             type: "get",
+//             async: false,
+//             data: {"demand": myDemand},
+//             success: function (data) {
+//                 var datas = $.parseJSON(data);
+//                 var length = datas.length;
+//                 for (var i = 0; i < length; i++) {
+//                     var lp = datas[i];
+//                     $("#Person" + i).html(lp.name);
+//                     $("#Describe" + i).html(lp.messages);
+//                     $("#Hao" + i).html(lp.haoma);
+//                 }
+//                 if (length < 5) {
+//                     for (var j = 0; j < (5 - length); j++) {
+//                         var newj = j + length;
+//                         $("#Person" + newj).html("<span>&nbsp</span> ");
+//                         $("#Describe" + newj).html("<span>&nbsp</span>");
+//                         $("#Hao" + newj).html("<span>&nbsp</span>");
+//                     }
+//                 }
+//             },
+//             error: function (err) {
+//                 for (var i = 0; i < 5; i++) {
+//                     $("#Person" + i).html("内容获取失败");
+//                     $("#Describe" + i).html("内容获取失败，请刷新或稍后再试！");
+//                     $("#Hao" + i).html("内容获取失败");
+//                 }
+//             }
+//         })
+//     });
+// });
 
 
 function maValidForm() {
@@ -251,3 +319,32 @@ $("#MissMe").click(function () {
         codeConfirm()
     }
 });
+
+
+function printDateTime() {
+    var intYears, intMonths, intDays, intHours, intMinutes;
+    var today;
+    today = new Date(); //系统当前时间
+    intYears = today.getFullYear(); //得到年份,getFullYear()比getYear()更普适
+    intMonths = today.getMonth() + 1; //得到月份，要加1
+    intDays = today.getDate(); //得到日期
+    if (intDays < 10) {
+        intDays = '0' + intDays;
+    }
+    intHours = today.getHours(); //得到小时
+    if (intHours < 10) {
+        intHours = '0' + intHours;
+    }
+    intMinutes = today.getMinutes(); //得到分钟
+    if (intMinutes < 10) {
+        intMinutes = '0' + intMinutes;
+    }
+    // var s = today.getSeconds();
+    $('#datetimenow').html("当前：" + intYears + '年' + intMonths + '月' + intDays + '日' + intHours + ':' + intMinutes);
+}
+
+//todo:printdatetime后面加上括号只会执行一次，但不加括号，要等到1000*60后才执行一次
+setTimeout(printDateTime, 0);
+setInterval(printDateTime, 1000 * 60);
+
+

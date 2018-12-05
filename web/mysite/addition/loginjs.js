@@ -129,11 +129,8 @@ function registerValidForm() {
     });
 }
 
-// $(registerValidForm());
-
 //todo:bug:先点击登录假装要登录，然后输入昵称密码和验证码再点击注册可以注册成功，二次密码和头像没有输入照样通过
 
-// $(function () {
 //不是onclick
 $("#register").click(function () {
     if (registerValidForm().form()) {
@@ -173,5 +170,4 @@ $("#register").click(function () {
         codeConfirm()
     }
 });
-// });
 

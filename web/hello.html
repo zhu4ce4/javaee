@@ -116,27 +116,6 @@
     </div>
     <hr/>
 
-    <script>
-        var intYears, intMonths, intDays, intHours, intMinutes;
-        var today;
-        today = new Date(); //系统当前时间
-        intYears = today.getFullYear(); //得到年份,getFullYear()比getYear()更普适
-        intMonths = today.getMonth() + 1; //得到月份，要加1
-        intDays = today.getDate(); //得到日期
-        if (intDays < 10) {
-            intDays = '0' + intDays;
-        }
-        intHours = today.getHours(); //得到小时
-        if (intHours < 10) {
-            intHours = '0' + intHours;
-        }
-        intMinutes = today.getMinutes(); //得到分钟
-        if (intMinutes < 10) {
-            intMinutes = '0' + intMinutes;
-        }
-        document.getElementById('datetimenow').innerHTML = "当前时间：" + intYears + '年' + intMonths + '月' + intDays + '日' + intHours + ':' + intMinutes;
-    </script>
-
 
     <div id="daohang">
         <div id="logo1" style="width: 196px">
