@@ -1,3 +1,8 @@
+$("#jianghu").mouseover(function () {
+    $("#username")[0].style.display = "inline";
+});
+
+
 //准备随机验证码用于调用
 function codeConfirm() {
     var generConfirmCode = Math.round(Math.random() * 8999 + 1000);
@@ -97,9 +102,9 @@ function GetPage() {
     //将$.ajax做成方法并命名为doAjax以便调用，调用时提供参数demand
     this.doAjax = function (demand) {
         $.ajax({
-        url: "readyForRen",
-        type: "get",
-        async: false,
+            url: "readyForRen",
+            type: "get",
+            async: false,
             data: {"demand": demand},
             // success: function (data) {
             //     var datas = $.parseJSON(data);
@@ -110,34 +115,34 @@ function GetPage() {
             //         $("#Hao" + i).html(lp.haoma);
             //     }
             // },
-        success: function (data) {
-            var datas = $.parseJSON(data);
-            //length()会报错！！
-            // var length = datas.length();
-            var length = datas.length;
-            for (var i = 0; i < length; i++) {
-                var lp = datas[i];
-                $("#Person" + i).html(lp.name);
-                $("#Describe" + i).html(lp.messages);
-                $("#Hao" + i).html(lp.haoma);
-            }
-            if (length < 5) {
-                for (var j = 0; j < (5 - length); j++) {
-                    var newj = j + length;
-                    $("#Person" + newj).html("<span>&nbsp</span>");
-                    $("#Describe" + newj).html("<span>&nbsp</span>");
-                    $("#Hao" + newj).html("<span>&nbsp</span>");
+            success: function (data) {
+                var datas = $.parseJSON(data);
+                //length()会报错！！
+                // var length = datas.length();
+                var length = datas.length;
+                for (var i = 0; i < length; i++) {
+                    var lp = datas[i];
+                    $("#Person" + i).html(lp.name);
+                    $("#Describe" + i).html(lp.messages);
+                    $("#Hao" + i).html(lp.haoma);
+                }
+                if (length < 5) {
+                    for (var j = 0; j < (5 - length); j++) {
+                        var newj = j + length;
+                        $("#Person" + newj).html("<span>&nbsp</span>");
+                        $("#Describe" + newj).html("<span>&nbsp</span>");
+                        $("#Hao" + newj).html("<span>&nbsp</span>");
+                    }
+                }
+            },
+            error: function (err) {
+                for (var i = 0; i < 5; i++) {
+                    $("#Person" + i).html("内容获取失败");
+                    $("#Describe" + i).html("内容获取失败，请刷新或稍后再试！");
+                    $("#Hao" + i).html("内容获取失败");
                 }
             }
-        },
-        error: function (err) {
-            for (var i = 0; i < 5; i++) {
-                $("#Person" + i).html("内容获取失败");
-                $("#Describe" + i).html("内容获取失败，请刷新或稍后再试！");
-                $("#Hao" + i).html("内容获取失败");
-            }
-        }
-    })
+        })
     }
 }
 
@@ -343,7 +348,7 @@ function printDateTime() {
     $('#datetimenow').html("当前：" + intYears + '年' + intMonths + '月' + intDays + '日' + intHours + ':' + intMinutes);
 }
 
-//todo:printdatetime后面加上括号只会执行一次，但不加括号，要等到1000*60后才执行一次
+//todo:printdatetime后面加上括号只会执行一次，但不加括号，要等到1000*60后才执行第一次
 setTimeout(printDateTime, 0);
 setInterval(printDateTime, 1000 * 60);
 

@@ -1,17 +1,18 @@
 //准备随机验证码用于调用
 function codeConfirm() {
     var generConfirmCode = Math.round(Math.random() * 8999 + 1000);
-    // var generConfirmCode = "ok"
     $("#randomCode").val(generConfirmCode);
-    // $("#randomCode").html(generConfirmCode);
 }
 
-//页面准备完成后调用上述函数,注意此处可以不用括号
-$(document).ready(codeConfirm);
+// 页面加载有两种方式表示1. $(document).ready();2. $(); 这种比较常用图片加载用load()函数dblclick() 表示双击
+// 注: 空白键和回车键也可以造成click事件，但是只有双击鼠标才能造成dblclick事件
+//html文档加载完成后再执行
+$(codeConfirm());
 
 // 客户上传头像缩略图实时展现
 $(function () {
     $("#userPhoto").on("change", function () {
+        //this表示触发事件的组件，可以在调用函数的时候，作为参数传进去
         var file = this.files[0];
         if (this.files && file) {
             var reader = new FileReader();
@@ -24,8 +25,8 @@ $(function () {
 });
 
 $(function () {
-    $("#accountName").on("keyup", function () {
-        var name = $("#accountName").val();
+    $("#accountName").on("change", function () {
+        var name = $(this).val();
         $.ajax({
             url: "Registerable",
             type: "get",
@@ -70,37 +71,38 @@ function loginValidForm() {
 
 
 //不是onclick
-$("#login").click(function () {
-    if (loginValidForm().form()) {
-        var name = $("#accountName").val();
-        var pwd = $("#password").val();
-        $.ajax({
-            url: "Login",
-            type: "post",
-            async: false,//同步：意思是当有返回值以后才会进行后面的js程序。
-            cache: false,
-            data: {"name": name, "password": pwd},
-            success: function (data) {
-                alert(data);
-                $("#logResult").html(data);
-                if (data === "登陆成功，2秒后跳转") {//根据返回值进行跳转
-                    //todo：睡2秒钟,且跳转不成功？？？
-                    window.location.href = 'hello.html';
-                } else {
+$(function () {
+    $("#login").click(function () {
+        if (loginValidForm().form()) {
+            var name = $("#accountName").val();
+            var pwd = $("#password").val();
+            $.ajax({
+                url: "Login",
+                type: "post",
+                async: false,//同步：意思是当有返回值以后才会进行后面的js程序。
+                cache: false,
+                data: {"name": name, "password": pwd},
+                success: function (data) {
+                    alert(data);
+                    $("#logResult").html(data);
+                    if (data === "登陆成功，2秒后跳转") {//根据返回值进行跳转
+                        //todo：睡2秒钟,且跳转不成功？？？
+                        window.location.href = 'hello.html';
+                    } else {
+                        window.location.href = 'login.html';
+                    }
+                },
+                error: function (err) {
+                    $("#logResult").html(err);
                     window.location.href = 'login.html';
                 }
-            },
-            error: function (err) {
-                $("#logResult").html(err);
-                window.location.href = 'login.html';
-            }
-        });
-    } else {
-        alert("登录失败");
-        codeConfirm()
-    }
+            });
+        } else {
+            alert("登录失败");
+            codeConfirm()
+        }
+    });
 });
-
 
 
 function registerValidForm() {
@@ -132,42 +134,67 @@ function registerValidForm() {
 //todo:bug:先点击登录假装要登录，然后输入昵称密码和验证码再点击注册可以注册成功，二次密码和头像没有输入照样通过
 
 //不是onclick
-$("#register").click(function () {
-    if (registerValidForm().form()) {
-        var name = $("#accountName").val();
-        var pwd = $("#password").val();
+$(function () {
+    $("#register").click(function () {
+        if (registerValidForm().form()) {
+            var name = $("#accountName").val();
+            var pwd = $("#password").val();
 
-        // var formData = new FormData($("#registerAndLogin").get(0));
-        var formData = new FormData(document.getElementById("registerAndLogin"));
-        formData.append("accountName", name);
-        formData.append("password", pwd);
-        $.ajax({
-            url: "Register",
-            type: "post",
-            data: formData,
+            // var formData = new FormData($("#registerAndLogin").get(0));
+            var formData = new FormData(document.getElementById("registerAndLogin"));
+            formData.append("accountName", name);
+            formData.append("password", pwd);
+            $.ajax({
+                url: "Register",
+                type: "post",
+                data: formData,
 
-            //需将异步关闭，也即设置为同步，也即前面的执行有了结果才能执行后面的，将async设置为true也即异步的话，
-            // 前面的还没看到结果后面的就执行了，导致看不到注册是否成功字样
-            async: false,
-            processData: false,
-            contentType: false,
-            cache: false,
-            success: function (data) {
-                $("#registerResult").html(data);
-                if (data === "注册成功") {
-                    //todo:跳转不成功，原因未知
-                    window.location.href = 'hello.html';
-                } else {
-                    window.location.href = 'login.html';
+                //需将异步关闭，也即设置为同步，也即前面的执行有了结果才能执行后面的，将async设置为true也即异步的话，
+                // 前面的还没看到结果后面的就执行了，导致看不到注册是否成功字样
+                async: false,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (data) {
+                    $("#registerResult").html(data);
+                    if (data === "注册成功") {
+                        //todo:跳转不成功，原因未知
+                        window.location.href = 'hello.html';
+                    } else {
+                        window.location.href = 'login.html';
+                    }
+                },
+                error: function () {
+                    $("#registerResult").html("请稍后再试!");
                 }
-            },
-            error: function () {
-                $("#registerResult").html("请稍后再试!");
-            }
-        });
-    } else {
-        alert("注册失败");
-        codeConfirm()
-    }
+            });
+        } else {
+            alert("注册失败");
+            codeConfirm()
+        }
+    });
 });
 
+$(function () {
+    $("#hideAndShow").click(function () {
+        // $("#hideAndShow").hover(function () {
+        // $("#registerAndLogin").toggleClass("show");
+        $(".hitme").toggle();
+//         注： 一般不要使用[class=className] 而应该使用.className
+// 因为使用$("[class='className']") .toggleClass("anotherClassName")
+// 会导致class变成className anotherClassName,再次 使用 [class=className] 就无法选中了
+// 而.className没有这个问题。
+        //[class='hitme ppp']只能匹配到'hitme ppp'(因为是绝对等于),而.hitme可以匹配hitme以及hitme ppp(只要包含hitme的class都能匹配到)
+        // $("button[class='hitme']").toggleClass("ppp");
+        // $("button.hitme").val("ooooooo");
+        // $("button[class='hitme ppp']").val("ooooooo");
+        // $("button.ppp").val("popopopo");
+        // 在监听函数中使用 $(this)，即表示触发该事件的组件。
+        // $("#registerAndLogin").toggleClass("visible-xs-block");
+        // if ($("#registerAndLogin").css("display")=="none") {
+        //     $("#registerAndLogin").show();
+        // } else {
+        //     $("#registerAndLogin").hide();
+        // }
+    });
+});

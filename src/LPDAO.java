@@ -9,6 +9,8 @@ import java.util.Properties;
 
 public class LPDAO {
 
+    public static int totalNumofMes = LPDAO.getMessNum();
+
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -71,6 +73,12 @@ public class LPDAO {
 
     //按照id倒排序（最新的在前面）从最新的数据开始取totalnum条数据
     public static List<LostPeople> getLatestLP(int idStart, int totalNum) {
+        if (idStart < 0) {
+            idStart = 0;
+        } else if (idStart > totalNumofMes - 1) {
+            idStart = totalNumofMes - 1;
+        }
+
         String sql = "select * from lostpeople order by id desc LIMIT ?,?";
         List<LostPeople> lps = new ArrayList<>();
         try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
