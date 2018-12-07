@@ -11,19 +11,22 @@
     <script src="mysite/addition/additional-methods.min.js"></script>
 </head>
 <body>
-<h1 class="text-info">会员登录/注册</h1>
+<h1 class="text-warning">会员登录/注册</h1>
 
 <!--因为浏览器指定了以二进制的形式提交数据，那么就不能通过常规的手段获取非File字段：
 也即accountname和password不能通过常规的request.getParameter("accountName")来获取-->
 <form enctype="multipart/form-data" id="registerAndLogin" method="post">
-    <label for="accountName">昵称：</label>
+    <!--<label for="accountName">昵称：</label>-->
+    <label class="text-warning">昵称<b style="color: orangered">*</b>：</label>
     <input class="btn-default" id="accountName" name="accountName" placeholder="请输入中文或英文" type="text">
     <span id="checkResult"></span>
     <br/>
-    <label for="password">密码：</label>
+    <!--<label for="password">密码：</label>-->
+    <label class="text-warning">密码<b style="color: orangered">*</b>：</label>
     <input class="password btn-default" id="password" name="password" placeholder="请输入密码" type="password"><br/>
 
-    <label for="confirmCode">验证：</label>
+    <!--<label for="confirmCode">验证：</label>-->
+    <label class="text-warning">验证<b style="color: orangered">*</b>：</label>
     <!--equalTo用于比较2个输入框的值，故只能设置为input而非其他-->
     <input class="btn disabled btn-danger randomCode" id="randomCode" name="randomCode" style="width: 60px">
 
@@ -32,27 +35,25 @@
            type="text">
 
     <br>
-    <button class="btn btn-primary" id="login">登录</button>
+    <button class="text-warning" id="login" style="font-size:large;">登录</button>
     <span id="logResult"></span>
     <br>
-    <label for="password_again">密码：</label>
+    <!--<label for="password_again">密码：</label>-->
+    <label class="text-warning">密码<b style="color: orangered">*</b>：</label>
     <input class="left btn-default" id="password_again" name="password_again" placeholder="注册时请再次输入密码" type="password"/><br/>
-    <label>头像：</label>
+    <label class="text-warning">头像<b style="color: orangered">*</b>：</label>
     <input id="userPhoto" name="filepath" type="file">
     <!--todo:若客户未上传头像，则使用默认头像-->
     <img id="usersPhoto" src="mysite/icon/defaultPhoto.jpg" style="width:100px;height:100px;">
     <br>
-    <button class="btn btn-primary" id="register">注册</button>
+    <button class="text-warning" id="register" style="font-size: large;">注册</button>
     <span id="registerResult"></span>
     <!--<button class="btn btn-primary" id="register" type="submit">注册</button>-->
     <!--不能有submit-->
 </form>
-
-<br>
-<br>
-<br>
-<button class="hitme" id="hit" type="button">点我</button>
-<button id="hideAndShow" type="button">点我有惊喜</button>
+<hr>
+<button class="hitme text-warning" id="hit" type="button">点我</button>
+<button class="text-warning" id="hideAndShow" type="button">点我有惊喜</button>
 
 
 <script src="mysite/addition/loginjs.js"></script>

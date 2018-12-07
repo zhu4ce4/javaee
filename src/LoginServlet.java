@@ -1,29 +1,42 @@
-import javax.servlet.ServletException;
+import net.sf.json.JSONSerializer;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.rmi.ServerException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginServlet extends HttpServlet {
-    public void service(HttpServletRequest request, HttpServletResponse response) throws ServerException, IOException, ServletException {
+    public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
 
         String nameTobeChecked = request.getParameter("name");
         String passwordTobeChecked = request.getParameter("password");
 
-        System.out.println(nameTobeChecked);
-        System.out.println(passwordTobeChecked);
-
         if (UserDAO.loginable(nameTobeChecked, passwordTobeChecked)) {
 //                    //todo:怎么发送cookies,并在页面显示用户名
-//                    Cookie name = new Cookie("name", URLEncoder.encode(accountName,"UTF-8"));
-//                    name.setMaxAge(60*60*24);
-//                    response.addCookie(name);
-            response.getWriter().println("登陆成功，2秒后跳转");
+            Cookie cookie = new Cookie("userName", URLEncoder.encode(nameTobeChecked, StandardCharsets.UTF_8));
+            cookie.setMaxAge(60 * 60 * 24);
+            response.setStatus(200);
+            response.addCookie(cookie);
+
+            request.getSession().setAttribute("userName", nameTobeChecked);
+            //todo:传递json
+            Map<String, Object> res = new HashMap<>();
+            res.put("success", true);
+            res.put("userName", nameTobeChecked);
+
+
+            String result = JSONSerializer.toJSON(res).toString();
+            response.getWriter().print(result);
             //使用ajax不能在此选择跳转，应该在ajax的回调函数中进行判断后跳转
-//            response.sendRedirect("hello.html");
+//            response.sendRedirect("hello.html");失效无用
         } else {
+//            response.sendRedirect("login.html");
             response.getWriter().println("登录失败，请重试");
         }
     }

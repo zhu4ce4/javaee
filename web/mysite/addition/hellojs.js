@@ -1,8 +1,3 @@
-$("#jianghu").mouseover(function () {
-    $("#username")[0].style.display = "inline";
-});
-
-
 //准备随机验证码用于调用
 function codeConfirm() {
     var generConfirmCode = Math.round(Math.random() * 8999 + 1000);
@@ -12,12 +7,6 @@ function codeConfirm() {
 
 //页面准备完成后调用上述函数,注意此处可以不用括号
 $(document).ready(codeConfirm);
-// $(document).ready(function codeConfirm() {
-//     var generConfirmCode = Math.round(Math.random() * 8999 + 1000);
-//     $("#randomCode").val(generConfirmCode);
-//     // $("#randomCode").html(generConfirmCode);
-// });
-
 
 function getResult() {
     var first = parseFloat(document.getElementById('first').value); //获取到的是string需要转换!
@@ -52,29 +41,6 @@ function resetInput() {
     document.getElementById('result').value = '';
 }
 
-// var box = document.querySelector('.box');
-// var content = document.querySelector('.content');
-// var text = document.querySelector('.text');
-//
-// var textWidth = text.offsetWidth;
-// var boxWidth=box.offsetWidth;
-//
-// window.onload = function checkScrollLeft() {
-//     content.innerHTML += content.innerHTML;
-//     document.querySelector('.text').classList.add('padding');
-//     // 更新
-//     textWidth = document.querySelector('.text').offsetWidth;
-//     toScrollLeft()
-// };
-//
-// function toScrollLeft() {
-//     // for (let i = 0; i <3; i++) {
-//     box.scrollLeft++;
-//     setTimeout('toScrollLeft()', 40);
-//     // }
-// }
-
-
 function compute() {
     var qishimoney = parseFloat(document.getElementById('origin').value);
     var rate = parseFloat(document.getElementById('rate').value);
@@ -106,39 +72,45 @@ function GetPage() {
             type: "get",
             async: false,
             data: {"demand": demand},
-            // success: function (data) {
-            //     var datas = $.parseJSON(data);
-            //     for (var i = 0; i < datas.length; i++) {
-            //         var lp = datas[i];
-            //         $("#Person" + i).html(lp.name);
-            //         $("#Describe" + i).html(lp.messages);
-            //         $("#Hao" + i).html(lp.haoma);
-            //     }
-            // },
-            success: function (data) {
-                var datas = $.parseJSON(data);
-                //length()会报错！！
-                // var length = datas.length();
-                var length = datas.length;
-                for (var i = 0; i < length; i++) {
-                    var lp = datas[i];
-                    $("#Person" + i).html(lp.name);
-                    $("#Describe" + i).html(lp.messages);
-                    $("#Hao" + i).html(lp.haoma);
-                }
-                if (length < 5) {
-                    for (var j = 0; j < (5 - length); j++) {
-                        var newj = j + length;
-                        $("#Person" + newj).html("<span>&nbsp</span>");
-                        $("#Describe" + newj).html("<span>&nbsp</span>");
-                        $("#Hao" + newj).html("<span>&nbsp</span>");
+
+            success: function (getResult) {
+                var result = $.parseJSON(getResult);
+                if (result.login === false) {
+                    $("#toRegister").html("会员注册/登录");
+                } else {
+                    var user = result.userName;
+                    if (null === user) {
+                        return;
+                    }
+                    // $("#toRegister").css("display", "none");
+                    $("#toRegister").html("会员:" + user);
+                    $("#beforeLogin").attr("href", "userProfile.html");
+
+                    var results = result.res;
+                    var length = results.length;
+                    for (var i = 0; i < length; i++) {
+                        var lp = results[i];
+                        //todo:在标题上面加上该文章的链接
+                        // $("#Person" + i).html("<a href='login.html'>"+lp.name+"</a>");
+                        $("#Person" + i).html(lp.name);
+                        $("#Describe" + i).html(lp.messages);
+                        $("#Hao" + i).html(lp.haoma);
+                    }
+                    if (length < 5) {
+                        for (var j = 0; j < (5 - length); j++) {
+                            // for (var j = 0; j < 1; j++) {
+                            var newj = j + length;
+                            $("#Person" + newj).html("<span>&nbsp;</span>");
+                            $("#Describe" + newj).html("<span>&nbsp;</span>");
+                            $("#Hao" + newj).html("<span>&nbsp;</span>");
+                        }
                     }
                 }
             },
             error: function (err) {
                 for (var i = 0; i < 5; i++) {
                     $("#Person" + i).html("内容获取失败");
-                    $("#Describe" + i).html("内容获取失败，请刷新或稍后再试！");
+                    $("#Describe" + i).html("请注册登录或稍后再试！");
                     $("#Hao" + i).html("内容获取失败");
                 }
             }
@@ -147,7 +119,6 @@ function GetPage() {
 }
 
 
-//先生成一个page变量备用
 var page = new GetPage();
 //页面加载完成随机调用取最新5条数据方法
 $(document).ready(page.doAjax("newestFive"));
@@ -165,118 +136,6 @@ $("#nextPage").on("click", function () {
 // 通过new Object创建对象有个问题，就是每创建一个对象，都得重新定义属性和函数。这样代码的重用性不好
 // 那么，采用另一种方式，通过function设计一种对象。 然后实例化它 。
 // 这种思路很像Java里的设计一种类，但是 javascript没有类，只有对象，所以我们叫设计一种对象
-
-// function firstPage() {
-//     var myDemand = "newestFive";
-//     $.ajax({
-//         url: "readyForRen",
-//         type: "get",
-//         async: false,
-//         data: {"demand": myDemand},
-//         success: function (data) {
-//             var datas = $.parseJSON(data);
-//             for (var i = 0; i < datas.length; i++) {
-//                 var lp = datas[i];
-//                 $("#Person" + i).html(lp.name);
-//                 $("#Describe" + i).html(lp.messages);
-//                 $("#Hao" + i).html(lp.haoma);
-//             }
-//         },
-//         error: function (err) {
-//             for (var i = 0; i < 5; i++) {
-//                 $("#Person" + i).html("内容获取失败");
-//                 $("#Describe" + i).html("内容获取失败，请刷新或稍后再试！");
-//                 $("#Hao" + i).html("内容获取失败");
-//             }
-//         }
-//     })
-// }
-
-// $(document).ready(firstPage);
-// firstPage("newestFive")有括号，该函数会在页面加载完成后立即执行,不带括号则点击后才会执行
-// $(function () {
-// $("#firstPage").click(firstPage);
-// });
-
-
-// $(function () {
-//     $("#lastPage").click(function () {
-//         var myDemand = "lastFive";
-//         $.ajax({
-//             url: "readyForRen",
-//             type: "get",
-//             async: false,
-//             data: {"demand": myDemand},
-//             success: function (data) {
-//                 var datas = $.parseJSON(data);
-//                 //length()会报错！！
-//                 // var length = datas.length();
-//                 var length = datas.length;
-//                 for (var i = 0; i < length; i++) {
-//                     var lp = datas[i];
-//                     $("#Person" + i).html(lp.name);
-//                     $("#Describe" + i).html(lp.messages);
-//                     $("#Hao" + i).html(lp.haoma);
-//                 }
-//                 if (length < 5) {
-//                     for (var j = 0; j < (5 - length); j++) {
-//                         var newj = j + length;
-//                         $("#Person" + newj).html("<span>&nbsp</span>");
-//                         $("#Describe" + newj).html("<span>&nbsp</span>");
-//                         $("#Hao" + newj).html("<span>&nbsp</span>");
-//                     }
-//                 }
-//             },
-//             error: function (err) {
-//                 for (var i = 0; i < 5; i++) {
-//                     $("#Person" + i).html("内容获取失败");
-//                     $("#Describe" + i).html("内容获取失败，请刷新或稍后再试！");
-//                     $("#Hao" + i).html("内容获取失败");
-//                 }
-//             }
-//         })
-//     });
-// });
-
-
-// $(function () {
-//     $("#nextPage").click(function () {
-//         var myDemand = "nextFive";
-//         $.ajax({
-//             url: "readyForRen",
-//             type: "get",
-//             async: false,
-//             data: {"demand": myDemand},
-//             success: function (data) {
-//                 var datas = $.parseJSON(data);
-//                 var length = datas.length;
-//                 for (var i = 0; i < length; i++) {
-//                     var lp = datas[i];
-//                     $("#Person" + i).html(lp.name);
-//                     $("#Describe" + i).html(lp.messages);
-//                     $("#Hao" + i).html(lp.haoma);
-//                 }
-//                 if (length < 5) {
-//                     for (var j = 0; j < (5 - length); j++) {
-//                         var newj = j + length;
-//                         $("#Person" + newj).html("<span>&nbsp</span> ");
-//                         $("#Describe" + newj).html("<span>&nbsp</span>");
-//                         $("#Hao" + newj).html("<span>&nbsp</span>");
-//                     }
-//                 }
-//             },
-//             error: function (err) {
-//                 for (var i = 0; i < 5; i++) {
-//                     $("#Person" + i).html("内容获取失败");
-//                     $("#Describe" + i).html("内容获取失败，请刷新或稍后再试！");
-//                     $("#Hao" + i).html("内容获取失败");
-//                 }
-//             }
-//         })
-//     });
-// });
-
-
 function maValidForm() {
     return $("#jianyineirong").validate({
         rules: {
@@ -289,10 +148,10 @@ function maValidForm() {
             }
         },
         messages: {
-            bxzname: "请输入被寻人名",
-            haoma: "请输入联系方式",
+            bxzname: "请输入标题",
+            haoma: "请输入联系方式或作者名",
             confirmCode: "请输入验证码",
-            leavemessage: "请输入描述"
+            leavemessage: "请输入内容"
         }
     });
 }
@@ -309,14 +168,13 @@ $("#MissMe").click(function () {
             data: {"name": name, "hao": haoma, "content": content},
             success: function (data) {
                 $("#missmeresult").html(data);
-                alert("成功");
-                //todo：睡2秒钟
-                window.location.href = 'hello.html';
+                alert("发帖成功");
+                window.location.reload();
             },
             error: function (err) {
-                alert("失败");
+                alert("发帖失败");
                 $("#logResult").html(err);
-                window.location.href = 'hello.html';
+                window.location.reload();
             }
         });
     } else {
@@ -351,5 +209,7 @@ function printDateTime() {
 //todo:printdatetime后面加上括号只会执行一次，但不加括号，要等到1000*60后才执行第一次
 setTimeout(printDateTime, 0);
 setInterval(printDateTime, 1000 * 60);
+
+
 
 

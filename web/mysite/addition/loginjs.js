@@ -83,18 +83,23 @@ $(function () {
                 cache: false,
                 data: {"name": name, "password": pwd},
                 success: function (data) {
-                    alert(data);
-                    $("#logResult").html(data);
-                    if (data === "登陆成功，2秒后跳转") {//根据返回值进行跳转
-                        //todo：睡2秒钟,且跳转不成功？？？
-                        window.location.href = 'hello.html';
+                    var res = $.parseJSON(data);
+                    if (res.success === true) {
+                        $("#logResult").html("注册成功!");
+                        $("#registerAndLogin").attr("action", "hello.html");
+
                     } else {
-                        window.location.href = 'login.html';
+                        $("#logResult").html("注册失败!");
+                        //以下均不可用
+                        // $(window).attr("location","localhost:8080/hello.html");
+                        // window.location.href = 'hello.html';
+                        $("#registerAndLogin").attr("action", "login.html");
+                        // window.location.href = 'login.html';
                     }
                 },
                 error: function (err) {
                     $("#logResult").html(err);
-                    window.location.href = 'login.html';
+                    $("#registerAndLogin").attr("action", "login.html");
                 }
             });
         } else {
@@ -158,10 +163,10 @@ $(function () {
                 success: function (data) {
                     $("#registerResult").html(data);
                     if (data === "注册成功") {
-                        //todo:跳转不成功，原因未知
-                        window.location.href = 'hello.html';
+                        $("#registerAndLogin").attr("action", "hello.html");
+
                     } else {
-                        window.location.href = 'login.html';
+                        $("#registerAndLogin").attr("action", "login.html");
                     }
                 },
                 error: function () {

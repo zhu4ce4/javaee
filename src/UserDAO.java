@@ -96,7 +96,7 @@ public class UserDAO {
         }
     }
 
-    public static void add(User aUser, int idDeleteIncase) throws InterruptedException, IOException {
+    public static void add(User aUser, int idDeleteIncase) throws IOException {
         String sql = "insert into users values(null,?,?,?)";
         try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, aUser.getName());
