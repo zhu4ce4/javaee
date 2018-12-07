@@ -85,15 +85,17 @@ $(function () {
                 success: function (data) {
                     var res = $.parseJSON(data);
                     if (res.success === true) {
-                        $("#logResult").html("注册成功!");
+                        $("#logResult").html("登录成功!");
+                        // window.location.href("hello.html");
+                        //todo:在IE里面下一行该条代码没有触发hello.html界面的自动加载数据readyforsevlet，而是需要手动刷新才行
                         $("#registerAndLogin").attr("action", "hello.html");
-
                     } else {
-                        $("#logResult").html("注册失败!");
+                        $("#logResult").html("登录失败,请稍后再试!");
                         //以下均不可用
                         // $(window).attr("location","localhost:8080/hello.html");
                         // window.location.href = 'hello.html';
-                        $("#registerAndLogin").attr("action", "login.html");
+                        alert("登录失败!");
+                        window.location.reload();
                         // window.location.href = 'login.html';
                     }
                 },

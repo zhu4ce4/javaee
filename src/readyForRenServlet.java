@@ -23,18 +23,20 @@ public class ReadyForRenServlet extends HttpServlet {
             res.put("userName", userName);
             List<LostPeople> lps = LPDAO.getLatestLP(numFrom, totalGetNum);
             res.put("res", lps);
+            System.out.println("成功");
             return JSONSerializer.toJSON(res).toString();
         } else {
             res.put("login", false);
+            System.out.println("失败");
             return JSONSerializer.toJSON(res).toString();
         }
     }
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String userName = (String) request.getSession().getAttribute("userName");
-        if (null == userName) {
+//        String userName = (String) request.getSession().getAttribute("userName");
+//        if (null == userName) {
+        String userName = null;
             Cookie[] cookies = request.getCookies();
             if (null != cookies) {
                 for (int i = 0; i < cookies.length; i++) {
@@ -47,23 +49,29 @@ public class ReadyForRenServlet extends HttpServlet {
                 response.getWriter().print(getJSONstr(false, "", 0, 0));
                 return;
             }
-        }
+//        }
 
         String demand = request.getParameter("demand");
         if ("newestFive".equals(demand)) {
+            System.out.println("new");
             //todo:未接之谜:序列化后的key是哪里指定的？
             response.getWriter().print(getJSONstr(true, userName, 0, 5));
+            System.out.println("new");
             numNow = 0;
         } else if ("nextFive".equals(demand)) {
             if (numNow + 5 < totalNumofMes) {
                 numNow += 5;
             }
+            System.out.println("next");
             response.getWriter().print(getJSONstr(true, userName, numNow, 5));
+            System.out.println("next");
         } else if ("lastFive".equals(demand)) {
             if (numNow - 5 >= 0) {
                 numNow -= 5;
             }
+            System.out.println("last");
             response.getWriter().print(getJSONstr(true, userName, numNow, 5));
+            System.out.println("last");
         }
     }
 }

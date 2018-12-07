@@ -32,7 +32,8 @@ public class RegisterServlet extends HttpServlet {
             response.setStatus(200);
             response.addCookie(user);
 
-            request.getSession().setAttribute("userName", name);
+            request.setAttribute("userName", name);
+//            request.getSession().setAttribute("userName", name);
             response.getWriter().print("注册成功");
         } else {
             response.getWriter().print("账号已被注册，请重新注册");

@@ -17,27 +17,33 @@ public class LoginServlet extends HttpServlet {
         String nameTobeChecked = request.getParameter("name");
         String passwordTobeChecked = request.getParameter("password");
 
+        System.out.println(0);
         if (UserDAO.loginable(nameTobeChecked, passwordTobeChecked)) {
 //                    //todo:怎么发送cookies,并在页面显示用户名
             Cookie cookie = new Cookie("userName", URLEncoder.encode(nameTobeChecked, StandardCharsets.UTF_8));
             cookie.setMaxAge(60 * 60 * 24);
             response.setStatus(200);
             response.addCookie(cookie);
-
-            request.getSession().setAttribute("userName", nameTobeChecked);
+            System.out.println(1);
+//            request.getSession().setAttribute("userName", nameTobeChecked);
             //todo:传递json
             Map<String, Object> res = new HashMap<>();
             res.put("success", true);
             res.put("userName", nameTobeChecked);
 
-
+            System.out.println(2);
             String result = JSONSerializer.toJSON(res).toString();
             response.getWriter().print(result);
             //使用ajax不能在此选择跳转，应该在ajax的回调函数中进行判断后跳转
 //            response.sendRedirect("hello.html");失效无用
         } else {
 //            response.sendRedirect("login.html");
-            response.getWriter().println("登录失败，请重试");
+            Map<String, Object> res = new HashMap<>();
+            res.put("success", false);
+
+            System.out.println(222);
+            String result = JSONSerializer.toJSON(res).toString();
+            response.getWriter().print(result);
         }
     }
 }

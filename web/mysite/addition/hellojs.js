@@ -46,9 +46,7 @@ function compute() {
     var rate = parseFloat(document.getElementById('rate').value);
     var years = parseInt(document.getElementById('years').value);
     var appendmoney = parseFloat(document.getElementById('benjin').value);
-
-    var benjinhe = qishimoney + appendmoney * years;
-    document.getElementById('amountOfBenjin').value = benjinhe;
+    document.getElementById('amountOfBenjin').value = qishimoney + appendmoney * years;
 
     var benxihe = qishimoney;
     var lixi = 0;
@@ -75,14 +73,17 @@ function GetPage() {
 
             success: function (getResult) {
                 var result = $.parseJSON(getResult);
-                if (result.login === false) {
-                    $("#toRegister").html("会员注册/登录");
-                } else {
+                // if (result.login === false) {
+                //     $("#toRegister").html("会员注册/登录");
+                // } else {
+                if (result.login === true) {
                     var user = result.userName;
                     if (null === user) {
                         return;
                     }
                     // $("#toRegister").css("display", "none");
+
+                    $("#haoma").val(user);
                     $("#toRegister").html("会员:" + user);
                     $("#beforeLogin").attr("href", "userProfile.html");
 
@@ -109,9 +110,9 @@ function GetPage() {
             },
             error: function (err) {
                 for (var i = 0; i < 5; i++) {
-                    $("#Person" + i).html("内容获取失败");
+                    $("#Person" + i).html("私密版块");
                     $("#Describe" + i).html("请注册登录或稍后再试！");
-                    $("#Hao" + i).html("内容获取失败");
+                    $("#Hao" + i).html("私密版块");
                 }
             }
         })
@@ -121,7 +122,7 @@ function GetPage() {
 
 var page = new GetPage();
 //页面加载完成随机调用取最新5条数据方法
-$(document).ready(page.doAjax("newestFive"));
+$(page.doAjax("newestFive"));
 
 $("#firstPage").on("click", function () {
     page.doAjax("newestFive");
@@ -168,8 +169,8 @@ $("#MissMe").click(function () {
             data: {"name": name, "hao": haoma, "content": content},
             success: function (data) {
                 $("#missmeresult").html(data);
-                alert("发帖成功");
-                window.location.reload();
+                alert(data);
+                // window.location.reload();此处不要用反而有问题，不用本行代码页面会自动刷新
             },
             error: function (err) {
                 alert("发帖失败");
