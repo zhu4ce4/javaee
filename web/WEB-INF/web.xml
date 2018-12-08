@@ -56,6 +56,17 @@
         <url-pattern>/readyForRen</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>OnlineNumberServlet</servlet-name>
+        <servlet-class>OnlineNumberServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OnlineNumberServlet</servlet-name>
+        <!--如果是ajax直接发送的,需要保证url域servlet名字一致-->
+        <url-pattern>/onlineNumber</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <!--注意是filter-->
         <filter-name>EncodingFilter</filter-name>
@@ -79,4 +90,8 @@
         <!--/*针对所有的页面都进行过滤;/*表示所有的访问都会过滤-->
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <listener>
+        <listener-class>OnlineNumberListener</listener-class>
+    </listener>
 </web-app>
