@@ -1,10 +1,11 @@
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 //开启文件(图片)上传功能，否则getpart取不到文件从而报错
 @MultipartConfig
@@ -26,13 +27,13 @@ public class RegisterServlet extends HttpServlet {
             User newUser = new User(name, password, realPicpath);
             UserDAO.add(newUser, userId);
 
-            Cookie user = new Cookie("userName", URLEncoder.encode(name, StandardCharsets.UTF_8));
+//            Cookie user = new Cookie("userName", URLEncoder.encode(name, StandardCharsets.UTF_8));
 //            Cookie user = new Cookie("userName", name);
-            user.setMaxAge(60 * 60 * 24);
-            response.setStatus(200);
-            response.addCookie(user);
-
-            request.setAttribute("userName", name);
+//            user.setMaxAge(60 * 60 * 24);
+//            response.setStatus(200);
+//            response.addCookie(user);
+            request.getSession().setAttribute("userName", name);
+//            request.setAttribute("userName", name);
 //            request.getSession().setAttribute("userName", name);
             response.getWriter().print("注册成功");
         } else {

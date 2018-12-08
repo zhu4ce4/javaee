@@ -76,7 +76,7 @@ function GetPage() {
                 // if (result.login === false) {
                 //     $("#toRegister").html("会员注册/登录");
                 // } else {
-                if (result.login === true) {
+                if (result.login === "true") {
                     var user = result.userName;
                     if (null === user) {
                         return;
@@ -168,8 +168,13 @@ $("#MissMe").click(function () {
             async: false,//同步：意思是当有返回值以后才会进行后面的js程序。
             data: {"name": name, "hao": haoma, "content": content},
             success: function (data) {
-                $("#missmeresult").html(data);
-                alert(data);
+                var result = $.parseJSON(data);
+                if (result.login === "false") {
+                    $("#missmeresult").html("请先注册登录");
+                    alert(result.login);
+                } else {
+                    $("#missmeresult").html("发帖成功");
+                }
                 // window.location.reload();此处不要用反而有问题，不用本行代码页面会自动刷新
             },
             error: function (err) {
@@ -210,7 +215,3 @@ function printDateTime() {
 //todo:printdatetime后面加上括号只会执行一次，但不加括号，要等到1000*60后才执行第一次
 setTimeout(printDateTime, 0);
 setInterval(printDateTime, 1000 * 60);
-
-
-
-

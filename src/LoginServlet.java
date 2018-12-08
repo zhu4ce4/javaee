@@ -1,12 +1,9 @@
 import net.sf.json.JSONSerializer;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,13 +17,15 @@ public class LoginServlet extends HttpServlet {
         System.out.println(0);
         if (UserDAO.loginable(nameTobeChecked, passwordTobeChecked)) {
 //                    //todo:怎么发送cookies,并在页面显示用户名
-            Cookie cookie = new Cookie("userName", URLEncoder.encode(nameTobeChecked, StandardCharsets.UTF_8));
-            cookie.setMaxAge(60 * 60 * 24);
-            response.setStatus(200);
-            response.addCookie(cookie);
+//            Cookie cookie = new Cookie("userName", URLEncoder.encode(nameTobeChecked, StandardCharsets.UTF_8));
+//            cookie.setMaxAge(60 * 60 * 24);
+//            response.setStatus(200);
+//            response.addCookie(cookie);
+            request.getSession().setAttribute("userName", nameTobeChecked);
             System.out.println(1);
+
+            //todo:session和cookies怎么协同
 //            request.getSession().setAttribute("userName", nameTobeChecked);
-            //todo:传递json
             Map<String, Object> res = new HashMap<>();
             res.put("success", true);
             res.put("userName", nameTobeChecked);
