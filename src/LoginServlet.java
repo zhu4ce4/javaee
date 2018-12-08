@@ -14,24 +14,25 @@ public class LoginServlet extends HttpServlet {
         String nameTobeChecked = request.getParameter("name");
         String passwordTobeChecked = request.getParameter("password");
 
-        System.out.println(0);
         if (UserDAO.loginable(nameTobeChecked, passwordTobeChecked)) {
 //                    //todo:怎么发送cookies,并在页面显示用户名
-//            Cookie cookie = new Cookie("userName", URLEncoder.encode(nameTobeChecked, StandardCharsets.UTF_8));
-//            cookie.setMaxAge(60 * 60 * 24);
-//            response.setStatus(200);
-//            response.addCookie(cookie);
-            request.getSession().setAttribute("userName", nameTobeChecked);
-            System.out.println(1);
 
             //todo:session和cookies怎么协同
 //            request.getSession().setAttribute("userName", nameTobeChecked);
             Map<String, Object> res = new HashMap<>();
             res.put("success", true);
-            res.put("userName", nameTobeChecked);
 
-            System.out.println(2);
+
+            User aUser = UserDAO.getAuser(nameTobeChecked);
+            //此处可放入一个user对象，需要通过客户的名称在数据库里取出user对象实例化后存入map,但不要包含密码信息
+            request.getSession().setAttribute("user", aUser);
+            System.out.println("loginservlet是否得到auser:" + aUser);
+
             String result = JSONSerializer.toJSON(res).toString();
+//            Cookie cookie = new Cookie("userName", URLEncoder.encode(nameTobeChecked, StandardCharsets.UTF_8));
+//            cookie.setMaxAge(60 * 10);
+////            response.setStatus(200);
+//            response.addCookie(cookie);
             response.getWriter().print(result);
             //使用ajax不能在此选择跳转，应该在ajax的回调函数中进行判断后跳转
 //            response.sendRedirect("hello.html");失效无用
@@ -39,8 +40,6 @@ public class LoginServlet extends HttpServlet {
 //            response.sendRedirect("login.html");
             Map<String, Object> res = new HashMap<>();
             res.put("success", false);
-
-            System.out.println(222);
             String result = JSONSerializer.toJSON(res).toString();
             response.getWriter().print(result);
         }

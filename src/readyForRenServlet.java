@@ -13,13 +13,15 @@ public class ReadyForRenServlet extends HttpServlet {
     public static int numNow = 0;
     public static int totalNumofMes = LPDAO.getMessNum();
 
-    public static String getJSONstr(String loginOrNot, String userName, int numFrom, int totalGetNum) {
+    public static String getJSONstr(String loginOrNot, User aUser, int numFrom, int totalGetNum) {
         Map<String, Object> res = new HashMap<>();
         if ("true".equals(loginOrNot)) {
             res.put("login", loginOrNot);
-            res.put("userName", userName);
+            res.put("user", aUser);
             List<LostPeople> lps = LPDAO.getLatestLP(numFrom, totalGetNum);
             res.put("res", lps);
+            System.out.println("成功");
+            System.out.println(JSONSerializer.toJSON(res).toString());
             System.out.println("成功");
             return JSONSerializer.toJSON(res).toString();
         } else {
@@ -31,7 +33,10 @@ public class ReadyForRenServlet extends HttpServlet {
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String userName = (String) request.getSession().getAttribute("userName");
+
+        User aUser = (User) request.getSession().getAttribute("user");
+        System.out.println("reayforren是否得到auser:" + aUser);
+
 //        if (null == userName) {
 //        String userName = null;
 //            Cookie[] cookies = request.getCookies();
@@ -54,7 +59,7 @@ public class ReadyForRenServlet extends HttpServlet {
         if ("newestFive".equals(demand)) {
             System.out.println("new");
             //todo:未接之谜:序列化后的key是哪里指定的？
-            response.getWriter().print(getJSONstr("true", userName, 0, 5));
+            response.getWriter().print(getJSONstr("true", aUser, 0, 5));
             System.out.println("new");
             numNow = 0;
         } else if ("nextFive".equals(demand)) {
@@ -62,14 +67,14 @@ public class ReadyForRenServlet extends HttpServlet {
                 numNow += 5;
             }
             System.out.println("next");
-            response.getWriter().print(getJSONstr("true", userName, numNow, 5));
+            response.getWriter().print(getJSONstr("true", aUser, numNow, 5));
             System.out.println("next");
         } else if ("lastFive".equals(demand)) {
             if (numNow - 5 >= 0) {
                 numNow -= 5;
             }
             System.out.println("last");
-            response.getWriter().print(getJSONstr("true", userName, numNow, 5));
+            response.getWriter().print(getJSONstr("true", aUser, numNow, 5));
             System.out.println("last");
         }
     }

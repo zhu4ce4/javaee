@@ -24,7 +24,7 @@ public class LoginFilter implements Filter {
         String uri = request.getRequestURI();
 
         //如果要用到missmeservlet或者readyforrenservlet就应该检查是否登录，否则直接放行
-        if (!uri.endsWith("MissMe") || uri.endsWith("readyForRen")) {
+        if (!(uri.endsWith("MissMe") || uri.endsWith("readyForRen"))) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -41,12 +41,19 @@ public class LoginFilter implements Filter {
 //        }
 
 
-        String userName = (String) request.getSession().getAttribute("userName");
-        System.out.println("userName  : " + userName);
-        if (null == userName) {
+        User aUser = (User) request.getSession().getAttribute("user");
+        System.out.println("loginfilter是否得到auser:" + aUser);
+//        String userName=aUser.getName();
+
+        //todo:怎么检查cookies当中的username？？？
+//        Cookie[] cookies = request.getCookies();
+
+
+        System.out.println("user  : " + aUser);
+        if (null == aUser) {
             response.setContentType("text/html;charset=UTF-8");
             System.out.println(198848);
-            response.getWriter().print(ReadyForRenServlet.getJSONstr("false", "", 0, 0));
+            response.getWriter().print(ReadyForRenServlet.getJSONstr("false", aUser, 0, 0));
             System.out.println(20181209);
             return;
         }

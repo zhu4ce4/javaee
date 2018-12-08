@@ -15,24 +15,29 @@ public class RegisterServlet extends HttpServlet {
 
         String name = request.getParameter("accountName");
         String password = request.getParameter("password");
+        String picDirectoryName = "usersPhoto";
 
         if (UserDAO.registerable(name)) {
             System.out.println(0);
             Part p = request.getPart("filepath");
-            int userId = UserDAO.nextId();
-            String filename = userId + ".jpg";
-            String photoFolder = request.getServletContext().getRealPath("usersPhoto");
+            int userIdPredict = UserDAO.nextId();
+            //todo:此处强制格式为jpg是否妥当?
+            String filename = userIdPredict + ".jpg";
+            String photoFolder = request.getServletContext().getRealPath(picDirectoryName);
             String realPicpath = photoFolder + File.separator + filename;
             p.write(realPicpath);
-            User newUser = new User(name, password, realPicpath);
-            UserDAO.add(newUser, userId);
+
+            String picStoredPath = picDirectoryName + File.separator + filename;
+            User newUser = new User(name, password, picStoredPath);
+            UserDAO.add(newUser, userIdPredict);
 
 //            Cookie user = new Cookie("userName", URLEncoder.encode(name, StandardCharsets.UTF_8));
 //            Cookie user = new Cookie("userName", name);
 //            user.setMaxAge(60 * 60 * 24);
 //            response.setStatus(200);
 //            response.addCookie(user);
-            request.getSession().setAttribute("userName", name);
+            //注册后不给cookies，应该要登录后才给
+//            request.getSession().setAttribute("userName", name);
 //            request.setAttribute("userName", name);
 //            request.getSession().setAttribute("userName", name);
             response.getWriter().print("注册成功");

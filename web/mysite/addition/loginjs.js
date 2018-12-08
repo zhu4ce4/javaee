@@ -165,7 +165,8 @@ $(function () {
                 success: function (data) {
                     $("#registerResult").html(data);
                     if (data === "注册成功") {
-                        $("#registerAndLogin").attr("action", "hello.html");
+                        alert("注册成功，请登录！");
+                        $("#registerAndLogin").attr("action", "login.html");
 
                     } else {
                         $("#registerAndLogin").attr("action", "login.html");

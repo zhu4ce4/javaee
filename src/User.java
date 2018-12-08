@@ -9,6 +9,12 @@ public class User {
     public User() {
     }
 
+    public User(int id, String name, String picpath) {
+        this.id = id;
+        this.name = name;
+        this.picpath = picpath;
+    }
+
     public User(String name, String password, String picpath) {
         this.name = name;
         this.password = password;

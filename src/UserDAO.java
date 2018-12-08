@@ -13,7 +13,7 @@ public class UserDAO {
 
     public static Connection getConnection() throws SQLException {
 
-        //已过期但必须加否则报错！！！
+        //!!!已过期但必须加否则报错！！！
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
@@ -129,34 +129,34 @@ public class UserDAO {
         }
     }
 
+    public static User getAuser(String name) {
+        User aUser = null;
+        String sql = "select id,userpicpath from users where username=?";
+        try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                String picpath = rs.getString(2);
+                aUser = new User(id, name, picpath);
+                System.out.println("数据库结果：" + aUser);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return aUser;
+    }
+
     //更新前需先进行校验操作
     public void update(User aUser, String sthTobeModified, String newValue) {
         String sql = String.format("update users set %s=? where id=?", sthTobeModified);
         try (Connection c = getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, newValue);
             ps.setInt(2, aUser.getId());
-            ps.execute();
+            ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-
-    public User getAuser(int id) {
-        User aUser = null;
-        try (Connection c = getConnection(); Statement s = c.createStatement()) {
-            String sql = String.format("select & from users where id=%d", id);
-            ResultSet rs = s.executeQuery(sql);
-            if (rs.next()) {
-                String name = rs.getString(2);
-                String password = rs.getString(3);
-                String picpath = rs.getString(4);
-                aUser = new User(name, password, picpath);
-                aUser.setId(id);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return aUser;
     }
 
     public List<User> list() {

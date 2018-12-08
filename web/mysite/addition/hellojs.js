@@ -73,19 +73,14 @@ function GetPage() {
 
             success: function (getResult) {
                 var result = $.parseJSON(getResult);
-                // if (result.login === false) {
-                //     $("#toRegister").html("会员注册/登录");
-                // } else {
                 if (result.login === "true") {
-                    var user = result.userName;
-                    if (null === user) {
-                        return;
-                    }
+                    var user = result.user;
                     // $("#toRegister").css("display", "none");
-
-                    $("#haoma").val(user);
-                    $("#toRegister").html("会员:" + user);
+                    $("#haoma").val(user.name);
+                    $("#toRegister").html(user.name);
+                    // $("#toRegister").html("ID:" + user.id+"&nbsp&nbsp"+user.name);
                     $("#beforeLogin").attr("href", "userProfile.html");
+                    $("#userPhoto").attr("src", user.picpath);
 
                     var results = result.res;
                     var length = results.length;
@@ -171,7 +166,7 @@ $("#MissMe").click(function () {
                 var result = $.parseJSON(data);
                 if (result.login === "false") {
                     $("#missmeresult").html("请先注册登录");
-                    alert(result.login);
+                    alert("请先登录！");
                 } else {
                     $("#missmeresult").html("发帖成功");
                 }
